@@ -1,0 +1,44 @@
+---
+title: "rOpenSci: Como acceder de forma reproducible a repositorios de datos publicos"
+author: "I. Bartomeus"
+date: "14/02/2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+El uso de datos publicos ha abierto la puerta a responder un abanico de preguntas que antes era inimaginable. En ecologia hay repositorios de datos de occurrencia de especies (www.gbif.com), climaticos (www.worldclim.com) o filogeneticos (www.treebase.com) que por si solos o combinados permiten analisis para testar teorias generales a una escala global. Sin embargo, obtener estos datos suele hacerse de forma no reproducible mediante el uso de interficies web. Estas interficies son utiles para explorar los datos y te permiten seleccionar que tipo de datos quieres y descargarlos a tu ordenador, pero en este proceso es suboptimo por dos razones. Primero, una vez tienes los datos, es imposible recordar que selección hizistes exactamente (no hay trazabilidad). Segundo, cuando hay nuevos datos disponibles o se han corregido errores en los datos originales del repositorio es imposible actualizar tus datos de forma automatica. 
+
+El equipo de @ropensci, entre otras cosas, se dedica a crear paquetes de R que permiten el acceso a datos publicos desde tu terminal de R. Esto te permite tener un codigo que es legible tanto por maquinas, como por humanos que especifica exactamante que datos has descargado (hay una trazabilidad completa). Asimismo, actualizar los datos con los ultimos cambios no requiere más esfuerzo que volver a correr el codigo. Las ventajas no son solo en incrementar la reproducibilidad de tus resultados, sino sobretodo te permite ahorrar tiempo y reducir el numero de pasos, y por siguiente el numero de potenciales errores de bulto que se pueden cometer en cada paso, de tu flujo de trabajo.
+
+Un ejemplo de este tipo de paquetes es bajar datos de tu especie favorita de gbif usando el paquete rGbif. Vamos a verlo en tres simples pasos que apenas ocupan X lineas de codigo en R.
+
+1) Instalar y cargar el paquete
+```{r}
+#install.packages("rgbif") #solo has de instalarlo la primera vez
+library(rgbif)
+```
+
+2) Bajar los datos que queremos
+```{r}
+dat <- occ_search(scientificName = "Andrena flavipes", limit = 50)
+dat
+```
+
+
+3) Plotear los datos obtenidos.
+
+```{r}
+library(maps)
+map("world", fill=TRUE, col="white", bg="lightblue", ylim=c(30, 70), xlim = c(-30,30), mar=c(0,0,0,0))
+points(dat$data$decimalLongitude, dat$data$decimalLatitude, col="red", pch=16)
+```
+
+Otros paquetes (y link a https://ropensci.org/packages/#data_access)
+Acabar diciendo que hay otras APIS, algunas con clientes para phython, por ejempo y etc... 
+
+
+
+
