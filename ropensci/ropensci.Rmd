@@ -1,0 +1,243 @@
+---
+title: "| rOpenSci: cómo acceder de forma reproducible a repositorios de datos públicos \n"
+  
+author: Ignasi Bartomeus^1^, Nombre Apellidos^2^
+  
+output:
+  word_document:
+    fig_caption: yes
+    fig_height: 6
+    fig_width: 7.5
+    highlight: null
+    reference_docx: Ecosistemas_template.docx
+    
+csl: ecosistemas.csl
+bibliography: 
+  - references.bib
+  - knitcitations.bib
+---
+
+
+> (1) Departmento de Ecología Integrativa, Estación Biológica de Doñana, Consejo Superior de Investigaciones Científicas, Avda. Américo Vespucio 26, 41092 Sevilla, España.
+
+> (2) Dirección del segundo autor.
+
+> Autor para correspondencia: Ignasi Bartomeus [ibartomeus@ebd.csic.es]
+
+
+
+
+# Palabras clave
+
+> palabra1; palabra2; palabra3; palabra4 
+
+
+# Keywords
+
+> keyword1; keyword2; keyword3; keyword4
+
+
+
+```{r knitcitations, echo=FALSE, cache = FALSE}
+library(knitcitations)
+cleanbib()   
+cite_options(citation_format = "pandoc")
+```
+
+
+
+El uso de datos públicos ha abierto la puerta a responder un abanico de preguntas que antes era inimaginable. En ecologia hay repositorios de datos de occurrencia de especies (www.gbif.com), climaticos (www.worldclim.com) o filogeneticos (www.treebase.com) que por si solos o combinados permiten analisis para testar teorias generales a una escala global. Sin embargo, obtener estos datos suele hacerse de forma no reproducible mediante el uso de interficies web. Estas interficies son utiles para explorar los datos y te permiten seleccionar que tipo de datos quieres y descargarlos a tu ordenador, pero en este proceso es suboptimo por dos razones. Primero, una vez tienes los datos, es imposible recordar que selección hizistes exactamente (no hay trazabilidad). Segundo, cuando hay nuevos datos disponibles o se han corregido errores en los datos originales del repositorio es imposible actualizar tus datos de forma automatica. 
+
+El equipo de ropensci, entre otras cosas, se dedica a crear paquetes de R que permiten el acceso a datos publicos desde tu terminal de R. Esto te permite tener un codigo que es legible tanto por maquinas, como por humanos que especifica exactamante que datos has descargado (hay una trazabilidad completa). Asimismo, actualizar los datos con los ultimos cambios no requiere más esfuerzo que volver a correr el codigo. Las ventajas no son solo en incrementar la reproducibilidad de tus resultados, sino sobretodo te permite ahorrar tiempo y reducir el numero de pasos, y por siguiente el numero de potenciales errores de bulto que se pueden cometer en cada paso, de tu flujo de trabajo.
+
+Un ejemplo de este tipo de paquetes es bajar datos de tu especie favorita de gbif usando el paquete rGbif. Vamos a verlo en tres simples pasos que apenas ocupan X lineas de codigo en R.
+
+1) Instalar y cargar el paquete
+```{r}
+#install.packages("rgbif") #solo has de instalarlo la primera vez
+library(rgbif)
+```
+
+2) Bajar los datos que queremos
+```{r}
+dat <- occ_search(scientificName = "Andrena flavipes", limit = 50)
+dat
+```
+
+
+3) Plotear los datos obtenidos.
+
+```{r}
+library(maps)
+map("world", fill=TRUE, col="white", bg="lightblue", ylim=c(30, 70), xlim = c(-30,30), mar=c(0,0,0,0))
+points(dat$data$decimalLongitude, dat$data$decimalLatitude, col="red", pch=16)
+```
+
+Otros paquetes (y link a https://ropensci.org/packages/#data_access)
+
+Acabar diciendo que hay otras APIS, algunas con clientes para phython, por ejempo y etc... 
+
+
+
+
+
+
+
+
+
+
+# Introducción 
+
+Esta es una plantilla para escribir [Notas Ecoinformáticas](https://github.com/ecoinfAEET/Notas_Ecosistemas) en formato Rmarkdown para la revista [Ecosistemas](www.revistaecosistemas.net). Para saber más sobre Rmarkdown, visite http://rmarkdown.rstudio.com. Para ver un ejemplo de manuscrito escrito íntegramente en Rmarkdown, visite https://github.com/ecoinfAEET/Reproducibilidad/blob/master/Repro_ms.Rmd.
+
+Hay varias formas de citar bibliografía (véase http://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html). Una de ellas requiere simplemente adjuntar un fichero BibTex con todas las referencias, y citar cada una de ellas usando su 'CitationKey' [e.g. @Yan2011; @Sutherland2011]. También pueden utilizarse paquetes como [knitcitations](https://cran.r-project.org/web/packages/knitcitations/index.html) o [RefManageR](https://cran.r-project.org/web/packages/RefManageR/index.html) para obtener automáticamente la información bibliográfica de internet. Por ejemplo, para citar un artículo es tan fácil como escribir su DOI `r citep("10.1016/j.tree.2006.03.016")` o incluso solo algunas palabras claves `r citep("Ricklefs 2008 American Naturalist")`. Estos artículos aparecerán automágicamente en la lista de referencias citadas. 
+
+
+ 
+
+# Métodos
+
+
+## Análisis de datos
+
+```{r read_data, eval = FALSE, echo = FALSE}
+dataset <- read.csv("mydata.csv")
+```
+
+Ajustamos un modelo lineal:
+
+$$
+y_{i} = \alpha + \beta*x_{i} 
+$$
+
+```{r model, echo = FALSE, eval = FALSE}
+model <- lm(y ~ x)
+```
+
+Utilizamos R `r citep(citation())` y Rmarkdown `r citep(list(citation("knitr"), citation("rmarkdown")))` para todos nuestros análisis. Para ajustar los modelos mixtos utilizamos `lme4` `r citep(citation("lme4"))`.
+
+
+
+
+# Resultados
+
+Esta sección está dividida en subsecciones.
+
+
+## Subsección 1
+
+Los árboles de la parcela A fueron más altos que en la parcela B (altura media: `r mean(25, 31, 28)` vs `r mean(13, 19, 16)` m). Y muchos más resultados que se actualizan dinámicamente.
+
+
+## Subsección 2
+
+Texto.
+
+
+## Subsección 3
+
+Texto.
+
+
+
+# Discusión
+
+Texto.
+
+
+
+# Conclusiones
+
+Texto.
+
+
+# Agradecimientos
+
+Agradecimientos.
+
+
+
+
+
+###### REFERENCIAS
+
+```{r write_citations, cache=FALSE, include=FALSE}
+write.bibtex(file = "knitcitations.bib")
+```
+
+<div id = "refs"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+###### TABLA 1
+
+**Tabla 1**. Cada tabla debe aportar su correspondiente encabezamiento explicativo. En los Artículos de investigación, de revisión y Comunicaciones breves se aportarán los encabezamientos tanto en castellano como en inglés, en letra Arial 10 y en página independiente. Es importante que sean simples y que no superen el ancho una página DIN A4 vertical. Los originales se deben aportar en formato tabla y no en formato imagen. 
+
+**Table 1**. Table heading in English. 
+
+```{r Tabla1, results='asis', echo=FALSE, cache=FALSE}
+library("knitr")
+kable(head(iris))
+```
+
+
+
+
+
+###### PIES DE FIGURA
+
+**Figura 1**. Pie de figura 1. 
+
+**Figura 2**. Pie de figura 2.
+
+
+
+
+
+###### FIGURE LEGENDS
+
+**Figure 1**. Figure caption.
+
+**Figure 2**. Figure caption.
+
+
+
+
+
+###### FIGURA 1
+
+```{r Fig1, echo=FALSE, fig.cap="Figura 1. Esto es un ejemplo.", cache=FALSE}
+x <- rnorm(100)
+y <- jitter(x, 1000)
+plot(x, y)
+```
+
+
+
+###### FIGURA 2
+
+```{r Fig2, echo=FALSE, fig.cap="Figura 2. Segundo ejemplo", cache=FALSE}
+a <- sort(rnorm(100))
+b <- c(rep("Group Small", 35), rep("Group Big", 65))
+boxplot(a ~ b)
+```
+
+
+
+
+
+
+
+
+
