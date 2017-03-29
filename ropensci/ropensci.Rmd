@@ -29,19 +29,19 @@ cleanbib()
 cite_options(citation_format = "pandoc")
 ```
 
-El uso de datos públicos ha abierto la puerta a responder un abanico de preguntas que antes era inimaginable. En ecología hay repositorios de datos de ocurrencia de especies (www.gbif.com), climáticos (www.worldclim.com) o filogenéticos (www.treebase.com) que por si solos o combinados permiten análisis para testar teorías generales a una escala global. Sin embargo, obtener estos datos suele hacerse de forma no reproducible mediante el uso de interficies web. Estas interficies son útiles para explorar los datos y te permiten seleccionar que tipo de datos quieres y descargarlos a tu ordenador, pero en este proceso es suboptimo por dos razones. Primero, una vez tienes los datos, es imposible recordar que selección hizistes exactamente (no hay trazabilidad). Segundo, cuando hay nuevos datos disponibles o se han corregido errores en los datos originales del repositorio es imposible actualizar tus datos de forma automática. 
+El uso de datos públicos ha abierto la puerta a responder un abanico de preguntas que antes era inimaginable `r citep(list("10.1126/science.1197962", "10.1016/j.tree.2011.11.016", "10.1890/120103"))`. En ecología hay repositorios de datos de ocurrencia de especies (www.gbif.com), climáticos (www.worldclim.com) o filogenéticos (www.treebase.com) que por sí solos o combinados permiten realizar análisis para testar teorías generales a una escala global. Sin embargo, obtener estos datos suele hacerse de forma no reproducible mediante el uso de interfaces web. Estas interfaces son útiles para explorar los datos y además permiten seleccionar qué tipo de datos quieres y descargarlos a tu ordenador, pero este proceso es subóptimo por dos razones. Primero, una vez tienes los datos, es imposible recordar qué selección hiciste exactamente (no hay trazabilidad). Segundo, cuando hay nuevos datos disponibles o se han corregido errores en los datos originales del repositorio es imposible actualizar los datos que descargaste de forma automática. 
 
-El equipo de ropensci (https://ropensci.org), entre otras cosas, se dedica a crear paquetes de R que permiten el acceso a datos públicos desde tu terminal de R. Esto te permite tener un código que es legible tanto por maquinas, como por humanos que especifica exactamente que datos has descargado (hay una trazabilidad completa). Asimismo, actualizar los datos con los últimos cambios no requiere más esfuerzo que volver a correr el código. Las ventajas no son solo en incrementar la reproducibilidad de tus resultados, sino sobretodo te permite ahorrar tiempo y reducir el numero de pasos de tu flujo de trabajo, y por siguiente el numero de potenciales errores de bulto que se pueden cometer en cada paso.
+El equipo de rOpenSci (https://ropensci.org), entre otras cosas, se dedica a crear paquetes de R que permiten el acceso a datos públicos desde tu terminal de R. Esto te permite tener un código legible tanto por máquinas como por humanos que especifica exactamente qué datos has descargado (hay una trazabilidad completa). Asimismo, actualizar los datos con los últimos cambios no requiere más esfuerzo que volver a correr el código. Las ventajas no están solo en incrementar la reproducibilidad de tus resultados, sino que sobre todo, el acceso a los datos directamente desde R te permite ahorrar tiempo y reducir el número de pasos de tu flujo de trabajo, y por consiguiente el número de potenciales errores de bulto que se pueden cometer en cada paso.
 
-Un ejemplo de este tipo de paquetes es bajar datos de tu especie favorita de gbif usando el paquete `rGbif`. Vamos a verlo en tres simples pasos que apenas ocupan cuatro lineas de código en R.
+Un ejemplo de cómo usar estos paquetes es bajar datos de tu especie favorita de gbif usando el paquete `rgbif`. Vamos a verlo en tres simples pasos que apenas ocupan cuatro líneas de código en R.
 
-1) Instalar y cargar el paquete
+1) Instalar y cargar el paquete.
 ```{r results='hide', echo = TRUE, message=FALSE, warning=FALSE}
 #install.packages("rgbif") #solo has de instalarlo la primera vez
 library(rgbif)
 ```
 
-2) Bajar los datos que queremos
+2) Bajar los datos que queremos.
 ```{r}
 dat <- occ_search(scientificName = "Andrena flavipes", limit = 10000)
 #dat
@@ -56,9 +56,20 @@ map("world", fill=TRUE, col="white", bg="lightblue", ylim=c(30, 70), xlim = c(-3
 points(dat$data$decimalLongitude, dat$data$decimalLatitude, col="red", pch=16)
 ```
 
-En este ejemplo muy simple nos limitamos a representar datos gráficamente, pero se pueden hacer análisis más interesantes combinando datos de varias fuentes (e.j.. https://ropensci.org/usecases/). 
+En este ejemplo tan simple nos limitamos a representar datos gráficamente, pero se pueden hacer análisis más interesantes combinando datos de varias fuentes (e.j. https://ropensci.org/usecases/). Como advertencia, hay que tener en cuenta que este tipo de datos abiertos pueden contener información erronea que debera ser depurada antes correr los análisis `r citep("10.1111/ecog.02118")`. El paquete 'scrubr', en desarroyo, pretende ayudar ha realizar esta necesaria limpieza inicial de los datos (https://github.com/ropensci/scrubr).
 
-La lista de paquetes disponibles para acceder a datos crece año a año (https://ropensci.org/packages/#data_access) y los paquetes se actualizan con regularidad solucionando errores o introduciendo mejoras, por tanto si encuentras algún fallo lo mejor que puedes hacer es comentárselo a sus autores. 
+La lista de paquetes disponibles para acceder a datos crece año a año (https://ropensci.org/packages/#data_access) y los paquetes se actualizan con regularidad solucionando errores o introduciendo mejoras. Por tanto, si encuentras algún fallo lo mejor que puedes hacer es comentárselo a sus autores. 
 
-Si estas interesado en el uso de datos libres y quieres hacerlo de forma programática, ropensci es un buen inicio, pero hay otros paquetes para R disponibles en CRAN, y para los que no usan R a veces existen clientes específicos para otros lenguajes (e.j. python). Solo es cuestión de saber buscar la herramienta que necesitas.
+Si estás interesado en el uso de datos libres y quieres hacerlo de forma programática, rOpenSci es un buen inicio, pero hay otros paquetes para R disponibles en CRAN, y para los que no usan R a veces existen clientes específicos para otros lenguajes (e.j. python). Solo es cuestión de saber buscar la herramienta que necesitas.
 
+## Agradecimientos
+Han contribuido a su revisión: Carlos Lara, Ana Isabel García-Cervigón, Antonio Jesús Pérez Luque y Francisco Rodríguez.
+
+
+## Referencias
+
+```{r write_citations, cache=FALSE, include=FALSE}
+write.bibtex(file = "knitcitations.bib")
+```
+
+<div id = "refs"></div>
