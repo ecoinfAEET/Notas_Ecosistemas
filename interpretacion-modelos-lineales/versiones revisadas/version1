@@ -1,0 +1,9 @@
+Hola a todos,
+
+gracias por vuestros comentarios. He tratado de incluir la mayoría de los cambios propuestos. He subido una nueva versión del documento marcando en rojo los cambios que me parecen más importantes por si alguno quiere hacer una segunda ronda de revisión.
+
+algunos de los cambios más importantes son:
+
+1. He cambiado la semilla para que la diferencia entre las distribuciones sea casi la misma entre los ejemplos con bajo y alto tamaño de muestra (Sugerencia Nacho)
+2. He incluído (y simplificado) la salida de las funciones summary y anova.
+3. He incluido figuras conn los boxplot (no aparecen en el word, pero las enviaré a la revista.
