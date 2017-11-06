@@ -71,7 +71,7 @@ Cómo escribir un trabajo científico es una decisión personal que depende de c
 En esta nota he tratado de presentaros un alternativa para escribrir textos científicos. Ahora ya depende de cada uno sumergirse en el mundo de los procesadores de texto por comandos. Existen muchos manuales abiertos y gratuitos (@oetiker1995introduccion,@baumer2014r) para comenzar a manejar este tipo de programas, y decidir qué método de trabajo nos parece el más adecuado. Sin embargo, no debemo olvidar que el objetivo de la ciencia es transmitir los descubrimientos para que todo el mundo pueda beneficiarse de ellos. Más importante que el "cómo", es el "qué" escribimos. Y este "qué" siempre debe ser lo más riguroso posible, ya escribamos en MS Word o en cualquier otro programa.   
 
 ####Agradecimientos
-Gracias al grupo de ecoinformática de la AEET por su revisión de esta nota. Hugo Saiz cuenta con una beca Juan de la Cierva-Formación del MINECO. Esta nota ecoinformática está escrita en RMarkdown. El archivo donde se incluye todo el código para reproducir el texto está incluido como material suplementario (S1).
+Gracias al grupo de ecoinformática de la AEET, especialmente a I. bartomeus, por su revisión de esta nota. Hugo Saiz cuenta con una beca Juan de la Cierva-Formación del MINECO. Esta nota ecoinformática está escrita en RMarkdown. El archivo donde se incluye todo el código para reproducir el texto está incluido como material suplementario (S1).
 
 ####Referencias
 
