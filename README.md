@@ -6,9 +6,11 @@ Son notas cortas de información y opinión sobre temas de ecoinformática en se
 
 El primer párrafo de la Nota debe introducir qué problema se aborda, dando una visión general para no especialistas. El segundo debe describir la potencial solución y sus principales ventajas de forma más general. Más que un tratado exhaustivo, se recomienda el uso de ejemplos (i.e. mostrando código) y referencias a la literatura o tutoriales especializados para el que quiera saber más.
 
-La revisión de las notas será llevada a cabo por la comunidad (open peer review) usando este repositorio. Esta sección será coordinada por [Ignasi Bartomeus](https://bartomeuslab.com/) y [Francisco Rodríguez](http://bit.ly/frod_san), miembros del [grupo de trabajo de Ecoinformática](http://ecoinfaeet.github.io) de la [AEET](http://www.aeet.org). Si estás interesado en escribir una Nota Ecoinformática ponte en contacto con nosotros o abre un issue en este repo mientras formalizamos un sistema de envío a la revista de forma directa.
+La revisión de las notas será llevada a cabo por la comunidad (open peer review) usando este repositorio. Esta sección será coordinada por [Nacho Bartomeus](https://bartomeuslab.com/) y [Paco Rodríguez](http://bit.ly/frod_san), miembros del [grupo de trabajo de Ecoinformática](http://ecoinfaeet.github.io) de la [AEET](http://www.aeet.org). Si estás interesado en escribir una Nota Ecoinformática ponte en contacto con nosotros o abre un issue en este repo.
 
 Hay un [issue abierto](https://github.com/ecoinfAEET/Notas_Ecosistemas/issues/1) para recoger propuestas de temas (y posibles responsables). Luego podemos abrir nuevos issues para discutir o recibir feedback para alguna propuesta en concreto.
+
+Una vez que tengáis lista la nota podéis subirla directamente a este repositorio haciendo un [fork y pull request](https://guides.github.com/activities/forking/). O enviarla directamente por correo a Nacho o Paco. Finalizada la revisión abierta en GitHub, los autores deberán enviar la nota a Ecosistemas utilizando el sistema normal de envío de la revista.
 
 ¡Gracias a todos por participar!
 
