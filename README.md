@@ -13,7 +13,7 @@ La sección de Notas Ecoinformáticas está coordinada por [Nacho Bartomeus](htt
 
 Hay un [issue abierto](https://github.com/ecoinfAEET/Notas_Ecosistemas/issues/1) para recoger propuestas de temas (y posibles responsables). Luego podemos abrir nuevos issues para discutir o recibir feedback para alguna propuesta en concreto.
 
-Para la escritura de la nota, recomendamos la utilización de la plantilla de Rmarkdown incluida en la carpeta 'template' de este repositorio. Dicha plantilla ya está configurada para generar un documento Word siguiendo todas las normas de estilo de la revista Ecosistemas. Alternativamente, también se puede escribir la nota en cualquier procesador de texto.
+Para la escritura de la nota, recomendamos la utilización de la [plantilla de Rmarkdown](https://github.com/ecoinfAEET/Notas_Ecosistemas/tree/master/template) incluida en la carpeta 'template' de este repositorio. Dicha plantilla ya está configurada para generar un documento Word siguiendo todas las normas de estilo de la revista Ecosistemas. Alternativamente, también se puede escribir la nota en cualquier procesador de texto.
 
 Una vez que tengáis lista la nota podéis subirla directamente a este repositorio haciendo un [fork y pull request](https://guides.github.com/activities/forking/). O enviarla directamente por correo a [Nacho Bartomeus](https://bartomeuslab.com/) o [Paco Rodríguez](http://bit.ly/frod_san).
 
