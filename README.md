@@ -17,7 +17,7 @@ Para la escritura de la nota, recomendamos la utilización de la [plantilla de R
 
 Una vez que tengáis lista la nota podéis subirla directamente a este repositorio haciendo un [fork y pull request](https://guides.github.com/activities/forking/). O enviarla directamente por correo a [Nacho Bartomeus](https://bartomeuslab.com/) o [Paco Rodríguez](http://bit.ly/frod_san).
 
-La revisión de las notas será totalmente abierta (open peer review) usando este repositorio (ver [ejemplo](https://github.com/ecoinfAEET/Notas_Ecosistemas/issues/4)).
+La revisión de las notas será totalmente abierta (open peer review) usando este repositorio. Más información sobre el proceso [aquí](https://github.com/ecoinfAEET/Notas_Ecosistemas/blob/master/Normas_revision_grupal.MD).
 
 Finalizada la revisión abierta en GitHub, los autores deberán enviar la nota a Ecosistemas utilizando el sistema normal de envío de la revista.
 
