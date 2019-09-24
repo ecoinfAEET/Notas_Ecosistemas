@@ -41,7 +41,7 @@ cite_options(citation_format = "pandoc")
 
 
 
-# Porqué es útil escribir funciones en R.
+# Por qué es útil escribir funciones en R.
 
 La respuesta más sencilla es porque  todo en R `r citep(citation())` se basa en funciones. Las funciones permiten repetir de forma sencilla (escribiendo menos código) y fiable (evitando errores, consecuencia de lo anterior) los mismos cálculos sobre diferentes conjuntos de datos. Imaginemos que queremos poner a punto en R el clásico método de la ordenación polar [@Bray_1957]. Como didácticamente resumen Gauch y Scruggs [-@Gauch_1980], los pasos a seguir serían:
 
@@ -119,7 +119,7 @@ doblestand(dune)
 ```    
 
 # Una función más compleja.
-De las 36 variantes existentes de ordenación polar [@Gauch_1980], la que más nos conviene para este ejemplo sustituye el cálculo del porcentaje en disimilaridad  (en el paso 2) por el cálculo de la distancia ecuclídea entre inventarios [@Orl_ci_1974]. En el paso final (3), la opción mas sencilla consistiría en colocar los inventarios sobre el eje representado por la distancia entre los más alejados ($A$ y $B$) mediante una proyección pitagórica, en base a la ecuación:    
+De las 36 variantes existentes de ordenación polar [@Gauch_1980], la que más nos conviene para este ejemplo sustituye el cálculo del porcentaje en disimilaridad  (en el paso 2) por el cálculo de la distancia euclídea entre inventarios [@Orl_ci_1974]. En el paso final (3), la opción mas sencilla consistiría en colocar los inventarios sobre el eje representado por la distancia entre los más alejados ($A$ y $B$) mediante una proyección pitagórica, en base a la ecuación:    
 $$X_i = \frac{D_{A,B}^2+D_{A,i}^2-D_{i,B}^2}{2D_{A,B}},$$
 donde $X_{i}$ es la posición del inventario $i$ en el eje de ordenación, $D_{A,B}$ es la distancia entre los inventarios extremos $A$ y $B$, y $D_{A,i}$ y $D_{i,B}$ son las distancias del inventario $i$ a ambos extremos.
 
@@ -150,7 +150,7 @@ opolar<- function(x){
 ```    
 En esta función hemos incluído ya los tres pasos de la ordenación polar. Es importante notar que, excepto el tercero, cada paso está codificado en una función independiente: esto otorga **modularidad** a nuestro código, lo que facilita su actualización y corrección si fuese necesario, además de mejorar su legibilidad y comprensión. Para esto último es conveniente también  incluir comentarios (precedidos por el símbolo **#**), explicando lo que hace cada bloque (o en su caso línea) de código. Como resultado de la ordenación polar tenemos varios objetos: el número de los inventarios extremos (`A` y `B`), la posición de los inventarios en el eje de ordenación (`X`) y el nombre de la tabla de datos original (`name.x`). La forma más conveniente de devolver varios objetos es dentro de una lista (a la que denominamos `resultado`). Y como queremos facilitarnos la vida, a dicha lista (que es un objeto de clase `list`) le asignamos una nueva clase (`miopolar`), completamente inventada, lo que nos permitirá desarrollar métodos específicos para presentar los resultados de nuestra función de manera cómoda.
 
-La simplicidad que aporta  una función de R queda parente en la siguiente frase
+La simplicidad que aporta  una función de R queda aparente en la siguiente frase
 
 ```{r}
 dune.o <- opolar(dune)
