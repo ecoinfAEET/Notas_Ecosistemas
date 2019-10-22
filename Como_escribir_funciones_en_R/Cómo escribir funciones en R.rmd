@@ -43,7 +43,7 @@ cite_options(citation_format = "pandoc")
 
 # Por qué es útil escribir funciones en R.
 
-La respuesta más sencilla es porque  todo en R `r citep(citation())` se basa en funciones. Las funciones permiten repetir de forma sencilla (escribiendo menos código) y fiable (evitando errores, consecuencia de lo anterior) los mismos cálculos sobre diferentes conjuntos de datos. Imaginemos que queremos poner a punto en R el clásico método de la ordenación polar [@Bray_1957]. Como didácticamente resumen Gauch y Scruggs [-@Gauch_1980], los pasos a seguir serían:
+La respuesta más sencilla es porque  todo en R `r citep(citation())` se basa en funciones. Las funciones permiten repetir de forma sencilla (escribiendo menos código) y fiable (evitando errores, consecuencia de lo anterior) los mismos cálculos sobre diferentes conjuntos de datos. Imaginemos que queremos poner a punto en R el clásico método de la ordenación polar [@Bray_1957] para estudiar [Falta dar contexto al lector brevemente sobre para que sirve esto](). Como didácticamente resumen Gauch y Scruggs [-@Gauch_1980], los pasos a seguir serían:
 
 1) Realizar una estandarización doble de la matriz de inventarios.
 2) Calcular la disimilitud entre inventarios.
@@ -65,9 +65,9 @@ head(dune)
 La denominada "doble estandarización" consiste en realidad en realizar dos normalizaciones consecutivas de la matriz de datos: la primera, dividiendo los valores de las columnas por el valor máximo de cada una y la segunda, dividiendo las filas por la suma total de cada una. Si no sabemos crear funciones, cada vez que necesitemos estandarizar deberemos escribir dos bucles `for()`
 
 ```{r}
-dune.s1<- NULL
-dune.s2 <- NULL
-for( i in 1: ncol(dune)) dune.s1 <- cbind(dune.s1, dune[,i]/max(dune[,i]))
+dune.s1<- NULL #creamos un objeto vacio para guardar calculos intermedios
+dune.s2 <- NULL #creamos un objeto vacio para guardar valores finales
+for( i in 1: ncol(dune)) dune.s1 <- cbind(dune.s1, dune[,i]/max(dune[,i])) 
 for(j in 1:nrow(dune.s1)) dune.s2 <- rbind(dune.s2, dune.s1[j,]/sum(dune.s1[j,]))
 ```
 Seguramente habremos leído en alguna parte que la función `apply()` posibilita una manera más elegante de trabajar con matrices y `data.frame`s evitando los engorrosos bucles. Claro, que para ello es necesario disponer de una **función** que *aplicar* a las filas o columnas.
@@ -77,7 +77,7 @@ Seguramente habremos leído en alguna parte que la función `apply()` posibilita
 
 Una función en R se crea usando la función `function()`. Los requisitos necesarios para crearla son: 1) darle nombre, 2) definir su(s) argumento(s) y 3) escribir el código de la función. Por ejemplo, una función para normalizar un vector por su máximo valor la podríamos definir como    
 ```{r}
-standmax <- function(x) x/max(x) 
+standmax <- function(x) x/max(x)
 ```   
 Aquí, `standmax` sería el nombre de la función, `x` sería el argumento (la representación simbólica del objeto que vamos a manipular con el código de nuestra función) y `x/max(x)` constituiría todo el código de la misma. A la hora de dar nombre a nuestra función o a sus argumentos tenemos casi total libertad, la misma que al crear cualquier nuevo objeto en R. 
 
@@ -88,12 +88,12 @@ standtot <- function(x) x/sum(x)
 Y con estas dos funciones podríamos realizar la "doble estandarización" de forma más sencilla que con el engorroso bucle:   
 ```{r}
 dune.s1 <- apply(dune, 2, standmax)
-dune.s2 <- t(apply(dune.s1, 1, standtot))
+dune.s2 <- t(apply(dune.s1, 1, standtot)) #COMMENT IB: Quizas es mejor usar MARGIN=2, para evitar perder a gente con t(). Además, nombrar todas los parametros seria importante X = , FUN = ... por claridad.
 ```   
 Alternativamente, en vez de dos funciones, podríamos hacer una que realice varios tipos de normalización, por ejemplo:
 
 ```{r}
-stand <- function(x, type="max") if(type=="max") x/max(x) else  x/sum(x)
+stand <- function(x, type="max") if(type=="max") x/max(x) else  x/sum(x) 
 ``` 
 En este caso, además del argumento `x`, que representa la tabla de datos, incluimos el argumento `type`, que por defecto dejamos inicializado en `"max"`. Sólo habrá que modificarlo si queremos realizar la normalización por la suma. Por lo tanto,  la doble estandarización la realizaríamos así:
 
@@ -119,7 +119,7 @@ doblestand(dune)
 ```    
 
 # Una función más compleja.
-De las 36 variantes existentes de ordenación polar [@Gauch_1980], la que más nos conviene para este ejemplo sustituye el cálculo del porcentaje en disimilaridad  (en el paso 2) por el cálculo de la distancia euclídea entre inventarios [@Orl_ci_1974]. En el paso final (3), la opción mas sencilla consistiría en colocar los inventarios sobre el eje representado por la distancia entre los más alejados ($A$ y $B$) mediante una proyección pitagórica, en base a la ecuación:    
+De las 36 variantes existentes de ordenación polar [@Gauch_1980], la que más nos conviene para este ejemplo sustituye el cálculo del porcentaje en disimilaridad (en el paso 2) por el cálculo de la distancia euclídea entre inventarios [@Orl_ci_1974]. En el paso final (3), la opción mas sencilla consistiría en colocar los inventarios sobre el eje representado por la distancia entre los más alejados ($A$ y $B$) mediante una proyección pitagórica, en base a la ecuación:    
 $$X_i = \frac{D_{A,B}^2+D_{A,i}^2-D_{i,B}^2}{2D_{A,B}},$$
 donde $X_{i}$ es la posición del inventario $i$ en el eje de ordenación, $D_{A,B}$ es la distancia entre los inventarios extremos $A$ y $B$, y $D_{A,i}$ y $D_{i,B}$ son las distancias del inventario $i$ a ambos extremos.
 
