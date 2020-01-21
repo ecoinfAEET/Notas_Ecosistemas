@@ -188,7 +188,7 @@ sqrtfun1(25)
 ```
 Frente a la facilidad para crear un paquete sencillo como éste, la única pega que le podemos poner a `devtools` es que no siempre respeta los caracteres propios del español (por ejemplo, la **ñ** o las vocales con tilde) en los ficheros de ayuda. Teniendo en cuenta que lo habitual es escribir la documentación de los paquetes de R en inglés, esto no suele suponer un problema (que por otra parte se puede solucionar o bien evitando dichos caracteres o bien adoptando la aproximación ortodoxa promovida en el manual oficial y aprovechando la posibilidad de [codificación alternativa][encoding_issues]). 
 
-Además de lo esbozado en esta nota, los paquetes de R pueden incluir conjuntos de datos, y son estructures ideales para trabajar con plataformas de control de versiones como git y el servidor github. En internet se pueden encontrar multitud de tutoriales específicos, entre los cuales recomendamos [el desarrollado por Karl Broman][tutorial]. El código necesario para reproducir este documento y el `paqueteR` usado como ejemplo se puede consultar en [GitHub][github_nota].
+Además de lo esbozado en esta nota, los paquetes de R pueden incluir conjuntos de datos, y son estructuras ideales para trabajar con plataformas de control de versiones como git y el servidor github. En internet se pueden encontrar multitud de tutoriales específicos, entre los cuales recomendamos [el desarrollado por Karl Broman][tutorial]. El código necesario para reproducir este documento y el `paqueteR` usado como ejemplo se puede consultar en [GitHub][github_nota].
 
 [1]: https://cloud.r-project.org/doc/manuals/r-release/R-exts.html
 [cran0]:  https://cran.r-project.org/
