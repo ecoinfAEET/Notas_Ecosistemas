@@ -2,16 +2,16 @@
 title: "Cómo crear paquetes de R \n"
 author: "David García-Callejas^1^, Marcelino de la Cruz Rot^2^"
 csl: ecosistemas.csl
-output:
-  pdf_document: default
-  word_document:
+output: 
+    word_document: default
     fig_caption: yes
     fig_height: 6
     fig_width: 7.5
     highlight: null
-    reference_docx: Ecosistemas_template.docx
+    reference_docx: notaAEET_crear_paquetes_R.docx
 bibliography:
 - references.bib
+
 ---
 
 
@@ -37,22 +37,23 @@ knitr::opts_chunk$set(eval = FALSE)
 
 # NOTA: Todos los chunks de código necesarios para seguir paso a paso 
 # la construcción del paquete tienen implícito EVAL=TRUE. 
-# En este chunk los reseteamos a EVAL=FALSE para que no se evalúen durante 
+# En este chunk los reseteamos a EVAL=FALSE para que no se evalúe durante 
 # la compilación del documento, pero haciendo esto podríamos ejecutar:
 #
-# knitr::purl("Cómo crear paquetes de  R.rmd")
+# knitr::purl("notaAEET_crear_paquetes_R.rmd")
 # 
-# lo que nos generaría el archivo "Cómo crear paquetes de  R.R" con todo el 
+# lo que nos generará el archivo "notaAEET_crear_paquetes_R.R" con todo el 
 # código necesario. Haciendo:
 # 
-# source("Cómo crear paquetes de  R.R")
+# source("notaAEET_crear_paquetes_R.R")
 #
 # creamos el paquete y corremos todos los ejemplos.
 
 ```
 
-```{r knitcitations, echo=FALSE, cache = FALSE, eval=TRUE}
+```{r knitcitations, echo=FALSE, cache = FALSE, eval=TRUE, warning = FALSE}
 library(knitcitations)
+library(bibtex)
 cleanbib()   
 cite_options(citation_format = "pandoc")
 ```
@@ -62,7 +63,7 @@ cite_options(citation_format = "pandoc")
 
 # CREAR DOCUMENTO:
 # library(rmarkdown)
-# render("Cómo crear paquetes de  R.rmd")
+# render("CÃ³mo crear paquetes de  R.rmd")
 
 
 ```
@@ -87,7 +88,7 @@ Package: paqueteR
 Version: 0.1
 encoding: UTF-8
 ````
-Si queremos hacer todo esto directamente desde R, sólo tendremos que escribir:  
+Si queremos hacer todo esto directamente desde R, solo tendremos que escribir:  
 ```{r}
 dir.create("paqueteR")
 setwd("./paqueteR")
@@ -160,7 +161,7 @@ sqrtfun2 <- function(x) x^(1/2)", file="./R/sqrtfun2.R")
 
 ```
 
-Como se puede observar, la parte dedicada a la documentación viene distinguida por dos caracteres especiales al comienzo de cada línea (`#'`). La primera línea indica el título de la función, y las siguientes pueden llevar una descripción más detallada de la misma. Cada argumento de la función viene documentado por un campo `@param`, y el tipo de dato que devuelve la función viene explicado en el campo `@return`. El campo `@export` indica que la función estará disponible para los usuarios del paquete, y en `@examples` podemos incluir ejemplos de uso de nuestra función. Estos campos corresponden exactamente con los que podemos ver en la ayuda de cualquier función de R; existen varios campos más que, por concreción, no detallamos aquí pero pueden ser consultados en la ayuda o en las [viñetas][roxygen2] de `roxygen2`. Una vez nuestras funciones estén apropiadamente documentadas, y con el directorio de trabajo en el directorio base de nuestro paquete, podemos procesar la documentación con
+Como se puede observar, la parte dedicada a la documentación viene distinguida por dos caracteres especiales al comienzo de cada línea (`#'`). La primera línea indica el título de la función, y las siguientes pueden llevar una descripción más detallada de la misma. Cada argumento de la función viene documentado por un campo `@param`, y el tipo de dato que devuelve la función viene explicado en el campo `@return`. El campo `@export` indica que la función estará disponible para los usuarios del paquete, y en `@examples` podemos incluir ejemplos de uso de nuestra función. Estos campos corresponden exactamente con los que podemos ver en la ayuda de cualquier función de R; existen varios campos más que, por concreción, no detallamos aquí pero pueden ser consultados en la ayuda o en las [viñetas][roxygen2] de `roxygen2`. Una vez nuestras funciones están apropiadamente documentadas, y con el directorio de trabajo en el directorio base de nuestro paquete, podemos procesar la documentación con
 
 ```{r}
 devtools::document()
@@ -186,7 +187,7 @@ library(paqueteR)
 sqrtfun1(25)
 ?sqrtfun1
 ```
-Frente a la facilidad para crear un paquete sencillo como éste, la única pega que le podemos poner a `devtools` es que no siempre respeta los caracteres propios del español (por ejemplo, la **ñ** o las vocales con tilde) en los ficheros de ayuda. Teniendo en cuenta que lo habitual es escribir la documentación de los paquetes de R en inglés, esto no suele suponer un problema (que por otra parte se puede solucionar o bien evitando dichos caracteres o bien adoptando la aproximación ortodoxa promovida en el manual oficial y aprovechando la posibilidad de [codificación alternativa][encoding_issues]). 
+Frente a la facilidad para crear un paquete sencillo como este, la única pega que le podemos poner a `devtools` es que no siempre respeta los caracteres propios del español (por ejemplo, la **ñ** o las vocales con tilde) en los ficheros de ayuda. Teniendo en cuenta que lo habitual es escribir la documentación de los paquetes de R en inglés, esto no suele suponer un problema (que por otra parte se puede solucionar o bien evitando dichos caracteres o bien adoptando la aproximación ortodoxa promovida en el manual oficial y aprovechando la posibilidad de [codificación alternativa][encoding_issues]). 
 
 Además de lo esbozado en esta nota, los paquetes de R pueden incluir conjuntos de datos, y son estructuras ideales para trabajar con plataformas de control de versiones como git y el servidor github. En internet se pueden encontrar multitud de tutoriales específicos, entre los cuales recomendamos [el desarrollado por Karl Broman][tutorial]. El código necesario para reproducir este documento y el `paqueteR` usado como ejemplo se puede consultar en [GitHub][github_nota].
 
@@ -205,7 +206,8 @@ MCR agradece la financiación del proyecto REMEDINAL TE-CM (S2018/EMT-4338). DGC
 
 ###### REFERENCIAS
 
-```{r write_citations, cache=FALSE, include=FALSE, eval=TRUE}
-#write.bibtex(file = "knitcitations.bib")
-write.bibtex(file = "references.bib", append=TRUE)
+```{r write_citations, cache=FALSE, include=FALSE, eval=FALSE}
+ref <- read.bib("references.bib", encoding = 'UTF-8')
+#write.bibtex(file = "knitcitations.bib", encoding="UTF-8")
+write.bibtex(entry = ref, append=FALSE)
 ```
