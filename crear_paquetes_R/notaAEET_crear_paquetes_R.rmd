@@ -72,12 +72,12 @@ cite_options(citation_format = "pandoc")
 
 En el lenguaje R `r citep(citation())`, los paquetes son la mejor manera de organizar, mantener y distribuir código y documentación. La motivación más directa para crear un paquete es la facilidad con que permiten compartir código con otros usuarios, pero de igual manera resulta extremadamente útil crear paquetes "de consumo propio", por ejemplo con funciones generales que son utilizadas en diferentes proyectos (véase @Delacruz_2019 para la creación de funciones en R). Incluir un paquete de R, bien documentado,  en el material suplementario de un artículo o de un informe científico garantiza la reproducibilidad de los resultados y promueve la difusión de los mismos.
 
-Existen numerosos recursos en internet con consejos y recetas para crear paquetes de R. La referencia fundamental es el manual oficial ["Writing R Extensions"][1], que acompaña cada instalación de R, centrado en la construcción manual, paso a paso, de los paquetes. Además, Wickham [-@Wickham_2015] proporciona una visión alternativa basada en la automatización de las tareas necesarias para la construcción y, sobre todo, el mantenimiento de paquetes. En esta sucinta nota, proporcionaremos una visión muy básica de la creación de paquetes usando la funcionalidad de los paquetes `devtools` `r citep(citation("devtools"))` y `roxygen2` [@Wickham_2018]. Por lo tanto, necesitaremos tener instalados ambos paquetes. Con la instrucción
+Existen numerosos recursos en internet con consejos y recetas para crear paquetes de R. La referencia fundamental es el manual oficial ["Writing R Extensions"][1], que acompaña cada instalación de R, centrado en la construcción manual, paso a paso, de los paquetes. Además, Wickham [-@Wickham_2015] (disponible en http://r-pkgs.had.co.nz/; segunda edición en camino disponible en https://r-pkgs.org/) proporciona una visión alternativa basada en la automatización de las tareas necesarias para la construcción y, sobre todo, el mantenimiento de paquetes. En esta sucinta nota, proporcionaremos una visión muy básica de la creación de paquetes usando la funcionalidad de los paquetes `devtools` `r citep(citation("devtools"))` y `roxygen2` [@Wickham_2018]. Por lo tanto, necesitaremos tener instalados ambos paquetes. Con la instrucción
 
 ```{r, eval=FALSE}
 install.packages("devtools", dependencies=TRUE)
 ```   
-nos aseguramos de tener instalados ambos. En todo caso, recomendamos que los usuarios interesados en conocer en detalle la estructura y creación de paquetes se remitan al manual oficial. En dicho manual, además, se detallan los requisitos adicionales para la publicación de paquetes en [CRAN][cran0], el repositorio oficial de paquetes de R.
+nos aseguramos de tener instalados ambos. En todo caso, recomendamos que los usuarios interesados en conocer en detalle la estructura y creación de paquetes se remitan al manual oficial. ~~En dicho manual, además, se detallan los requisitos adicionales para la publicación de paquetes en [CRAN][cran0], el repositorio oficial de paquetes de R.~~ [[En el manual de Hadley también se explica cómo preparar el paquete para CRAN. Propongo corregir o eliminar esta frase]]
 
 # Estructura básica
 
@@ -95,18 +95,26 @@ setwd("./paqueteR")
 cat(c("Package: paqueteR", "Version: 0.1", "encoding: UTF-8"), sep="\n", file="DESCRIPTION")
 ```
 
+[[Esto por supuesto es correcto, pero para una nota introductoria de cómo crear paquetes me parece innecesariamente enrevesado. Creo que hay formas mucho más sencillas, por ejemplo usethis::create_package, o directamente en Rstudio -> create new package, para usuarios de Rstudio. Y si no el viejo package.skeleton... Yo recomendaría Rstudio o usethis]]
+
 El archivo `DESCRIPTION` suele contener, además de estos campos, multitud de información, incluyendo un pequeño resumen de su funcionalidad, los autores y, en su caso,  las dependencias del paquete, es decir, los paquetes auxiliares que utilicemos en las funciones de nuestro propio paquete. En el manual citado anteriormente (sección [*"1.1.1 The DESCRIPTION file"*][DESCRIPTION_REF]) se puede consultar en detalle el contenido de este importante archivo.
 
 # Añadir y documentar código
 
 El siguiente paso es añadir el código que queremos incluir en nuestro paquete. Siguiendo con nuestro ejemplo, nos gustaría que nuestro `paqueteR` incluya dos funciones:
 
+[[esto ya es cuestión de preferencias personales, pero como sugerencia, quizás meter la función entre llaves? i.e. function (x) {sqrt(x)}. Porque para funciones más complejas al final las van a necesitar...]]
+
 ```{r}
 sqrtfun1 <- function(x) sqrt(x)
 sqrtfun2 <- function(x) x^(1/2)
 ```
 
-En general, es recomendable guardar cada función en un archivo independiente que tenga el mismo nombre que la función. Esto facilita la modularidad del código y evita potenciales duplicidades. En nuestro caso, por tanto, tendríamos un archivo `sqrtfun1.R` y otro `sqrtfun2.R`. Para incluir ambas funciones en nuestro paquete, hemos de crear una carpeta llamada `R` dentro del directorio principal, y mover allí nuestras funciones. Si las funciones las tenemos en nuestro *workspace*, y queremos hacerlo todo desde R podemos escribir en la consola:
+En general, es recomendable guardar cada función en un archivo independiente que tenga el mismo nombre que la función. Esto facilita la modularidad del código y evita potenciales duplicidades. En nuestro caso, por tanto, tendríamos un archivo `sqrtfun1.R` y otro `sqrtfun2.R`. Para incluir ambas funciones en nuestro paquete, hemos de crear una carpeta llamada `R` dentro del directorio principal, y mover allí nuestras funciones. 
+
+[[Creo que esta parte de abajo se puede quitar, por simplificar la nota e intentar acercarnos a las 1000 palabras. Además creo que en general las funciones ya se escribirán directamente sobre un fichero .R, no directamente en la consola no?]]
+
+~~Si las funciones las tenemos en nuestro *workspace*, y queremos hacerlo todo desde R podemos escribir en la consola:
 
 ```{r}
 dir.create("R")
@@ -116,7 +124,8 @@ dump("sqrtfun2", file="./R/sqrtfun2.R")
 
 
 
-Con estos sencillos pasos ya tenemos la estructura básica de un paquete, pero antes de "construirlo" es necesario documentar nuestro código, para facilitar su distribución y uso por parte de otros usuarios (o de nosotros mismos en un futuro). Generar documentación a través de `roxygen2` es muy sencillo. Basta con añadir, al comienzo de nuestros archivos .R, una serie de campos que expliquen el uso de la función en cuestión. En nuestras funciones, los archivos documentados tendrían la siguiente forma:
+
+Con estos sencillos pasos ya tenemos la estructura básica de un paquete, pero antes de "construirlo" es necesario documentar nuestro código, para facilitar su distribución y uso por parte de otros usuarios (o de nosotros mismos en un futuro). Generar documentación a través de `roxygen2` es muy sencillo. Basta con añadir, al comienzo de nuestros archivos .R, una serie de campos que expliquen el uso de la función en cuestión (el comando 'Insert Roxygen Skeleton' en RStudio puede ayudar generando una plantilla). En nuestras funciones, los archivos documentados tendrían la siguiente forma:
 
 ````
 #' Raíz cuadrada 1
@@ -166,7 +175,7 @@ Como se puede observar, la parte dedicada a la documentación viene distinguida 
 ```{r}
 devtools::document()
 ```
-Si no ha habido ningún problema, esta acción habrá generado un archivo nuevo en nuestro directorio llamado `NAMESPACE`, así como un archivo .Rd en la subcarpeta `man` por cada función de nuestro paquete. El "espacio de nombres" es una guía que indica a R 1) si una función del paquete está disponible (una función exportable) o no (una función interna) y 2) dónde se encuentran las funciones de otros paquetes que se emplean dentro del código de nuestras funciones. Cada uno de los archivos .Rd contiene la documentación que hemos creado y servirá para generar las páginas de ayuda y el manual del paquete cuando realicemos la instalación.
+Si no ha habido ningún problema, esta acción habrá generado un archivo nuevo en nuestro directorio llamado `NAMESPACE`, así como un archivo .Rd en la subcarpeta `man` por cada función de nuestro paquete. El ~~"espacio de nombres"~~`NAMESPACE` [[creo que es mejor usar NAMESPACE]] es una guía que indica a R 1) si una función del paquete está disponible (una función exportable) o no (una función interna) y 2) dónde se encuentran las funciones de otros paquetes que se emplean dentro del código de nuestras funciones. Cada uno de los archivos .Rd contiene la documentación que hemos creado y servirá para generar las páginas de ayuda y el manual del paquete cuando realicemos la instalación.
 
 # Creación del paquete
 
@@ -193,7 +202,7 @@ Además de lo esbozado en esta nota, los paquetes de R pueden incluir conjuntos 
 
 [1]: https://cloud.r-project.org/doc/manuals/r-release/R-exts.html
 [cran0]:  https://cran.r-project.org/
-[roxygen2]:  https://cloud.R-project.org/package=roxygen2/vignettes/roxygen2.html
+[roxygen2]:  https://roxygen2.r-lib.org/index.html
 [DESCRIPTION_REF]: https://cloud.r-project.org/doc/manuals/r-release/R-exts.html#The-DESCRIPTION-file
 [encoding_issues]: https://cloud.r-project.org/doc/manuals/r-release/R-exts.html#Encoding-issues
 [tutorial]: https://kbroman.org/pkg_primer/
