@@ -30,7 +30,7 @@ bibliography:
 
 ## Keywords
 
-> phenology; diel activity; Rayleigh test; test de Mardia-Watson-Wheeler
+> phenology; diel activity; Rayleigh test; Mardia-Watson-Wheeler test
 
 
 ```{r knitcitations, echo=FALSE, cache = FALSE, warning = FALSE}
@@ -43,24 +43,24 @@ cite_options(citation_format = "pandoc")
 
 
 
-La estadística circular es una poderosa herramienta que permite analizar de forma apropiada variables que tienen una naturaleza cíclica y para los que la estadística linear no es correcta. Algunos ejemplos clásicos en Ecología incluyen el estudio de diferentes momentos de la floración o fructificación de una especie a lo largo del año, los patrones de actividad diarios de un mamífero, o las direcciones de vuelo de las mariposas. En estos casos, es importante destacar que la designación de un cero es completamente arbitraria y, por consiguiente, también la de valores mayores o menores. Por ejemplo, la diferencia entre el mes de enero y diciembre es de solo un mes en una escala circular, mientras que en una escala linear, dicha diferencia sería de 12 meses.
+La estadística circular es una poderosa herramienta que permite analizar variables que tienen una naturaleza cíclica y para los que la estadística linear no es apropiada. Algunos ejemplos clásicos en Ecología incluyen el estudio de la fenología de la fructificación de una especie a lo largo del año o los patrones de actividad diarios de un mamífero. En estos casos, la designación de un cero (y de valores mayores o menores) es completamente arbitraria. Por ejemplo, la diferencia entre el mes de enero y diciembre es de solo un mes en una escala circular, mientras que en una escala linear, dicha diferencia sería de 12 meses.
 
-# Transformación de nuestra variable de naturaleza circular en ángulos
-La primera medida que debemos hacer con nuestros datos de naturaleza circular es convertirlos en ángulos. Esto es fácilmente realizable con una simple ecuación [@Zar1999]: 
+# Transformación en ángulos de nuestra variable de naturaleza circular 
+La primera transformación que debemos hacer con nuestros datos de naturaleza circular es convertirlos en ángulos mediante una simple ecuación [@Zar1999]: 
 
 
 $$
-a = \frac{(360º)(X)}{k}
+a = \frac{(360^\circ)(X)}{k}
 $$
-En la que *X* representa la variable temporal que queremos convertir en una dirección angular (en grados) y *k* es la cantidad total de unidades de tiempo de nuestra circunferencia (*k* = 365 para días del año, o *k* = 12 para meses, por ejemplo). De esta manera, el 14 de febrero, que es el día 45º del año, corresponde a 
+*X* representa la variable temporal que queremos convertir en un valor angular (en $^\circ$) y *k* es la cantidad total de unidades de tiempo de nuestra circunferencia (*k* = 365 para días del año o *k* = 12 para meses, por ejemplo). De esta manera, el 14 de febrero, que es el 45º día  del año, corresponde a 
 
 ```{r ejemplo14feb, eval = TRUE, echo = TRUE}
 a <- 360*45/365
 ```
-`r round(a, 2)` grados. En el caso de medidas mensuales, los 360º se dividen en 12 sectores de 30º. Por convención, se considera el punto medio del sector como el correspondiente a cada mes, es decir 15º para enero, 45º para febrero, ... y 345º para diciembre. 
+`r round(a, 2)`$^\circ$. En el caso de medidas mensuales, los 360$^\circ$ se dividen en 12 sectores de 30$^\circ$. Por convención, se considera el punto medio del sector como el correspondiente a cada mes, es decir 15$^\circ$ para enero, 45$^\circ$ para febrero, ... y 345$^\circ$ para diciembre. 
 
-# Ejemplos usados y esquema de la nota
-En esta nota, vamos a usar dos ejemplos muy sencillos, uno referido a fenología de la fructificación en Nouragues (Guyana francesa) extraído de Mendoza *et al.* [-@Mendoza2018] y el otro a los patrones de actividad del agutí y del pecarí de la Isla de Barro Colorado [@Rowcliffe2014], extraídos del paquete `activity` `r citep(citation("activity"))`. Estos ejemplos permitirán mostrar cómo hacer representaciones gráficas circulares, calcular métricas circulares básicas y hacer inferencia sobre hipótesis de una y dos muestras. Utilizaremos R `r citep(citation())` para todos nuestros análisis, en concreto los tres paquetes de R que permiten analizar los datos circulares: `Directional` `r citep(citation("Directional"))`, `CircStats` `r citep(citation("CircStats"))`, y `circular` `r citep(citation("circular"))`, así como el paquete `ggplot2` `r citep(citation("ggplot2"))` para las representaciones gráficas. Debido a las limitaciones de espacio de esta nota, se recomienda revisar otras referencias para tener más detalle de los métodos, fórmulas exactas y aplicaciones a la Ecología de la estadística circular [@Batschelet1981; @Morellato2010; @MardiaJupp2000; @Staggemeier2020] . 
+# Ejemplos usados
+Usaré dos ejemplos en esta nota, uno referido a fenología de la fructificación en Nouragues (Guyana francesa) extraído de Mendoza *et al.* [-@Mendoza2018] y el otro a los patrones de actividad del agutí y del pecarí de la Isla de Barro Colorado [@Rowcliffe2014], extraídos del paquete `activity` `r citep(citation("activity"))`. Me centraré en tres de los muchos paquetes de R `r citep(citation())` que permiten analizar datos circulares: `Directional` `r citep(citation("Directional"))`, `CircStats` `r citep(citation("CircStats"))`, y `circular` `r citep(citation("circular"))`, así como el paquete `ggplot2` `r citep(citation("ggplot2"))` para las representaciones gráficas. Debido a las limitaciones de espacio de esta nota, se recomienda revisar otras referencias para tener más detalle de los métodos, fórmulas exactas y aplicaciones a la Ecología de la estadística circular [@Zar1999; @Batschelet1981; @Morellato2010; @MardiaJupp2000; @Staggemeier2020] así como otros paquetes de R disponibles para análisis circulares (p.ej. `cplots` `r citep(citation("cplots"))`. 
 
 ```{r librarycall, eval = TRUE, echo = TRUE, warning = FALSE, message = FALSE}
 library(activity)
@@ -74,94 +74,87 @@ library(ggplot2)
 ```{r dataexample, eval = TRUE, echo = TRUE}
 aguti <- subset(activity::BCItime, species == "agouti")
 pecari <- subset(activity::BCItime, species == "peccary")
-#se seleccionan los datos del agutí y pecarí de la base de datos BCItime del paquete activity. El tiempo de muestreo está expresado como una proporción relativa a las 24 horas de un día.
+#se seleccionan los datos del agutí y pecarí de la base de datos BCItime del paquete "activity". El tiempo de muestreo está expresado como una proporción relativa a las 24 horas de un día.
 
-frutofrq <- data.frame(meses = c("ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"), meses.ang = seq(15, 350, 30), numspp = c(21, 23, 32, 31, 29, 20, 19, 18, 15, 17, 21, 16))  #estos datos representan el número de especies en fruto por mes en Nouragues (extraído de Mendoza et al. 2018)         
+frutofrq <- data.frame(meses = month.abb, meses.ang = seq(15, 350, 30), numspp = c(21, 23, 32, 31, 29, 20, 19, 18, 15, 17, 21, 16))  
+
+#estos datos representan el número de especies en fruto por mes en Nouragues (extraído de Mendoza et al. 2018).
+#"meses.ang" es el valor angular de cada mes
 ```
 
 # Representaciones gráficas de datos circulares
 
-El paquete `circular` `r citep(citation("circular"))` permite representar fácilmente los datos circulares que no están en frecuencias convirtiéndolos en un objeto `circular` usando la función `plot` (Fig. 1). 
+Cualquier estadística descriptiva pasa por la representación gráfica de los datos. En el caso de datos circulares, el paquete `circular` `r citep(citation("circular"))` permite hacer diagramas de rosa convirtiendo los datos circulares en un objeto `circular` primero y usando luego `rose.diag` (Fig. 1). 
 
 ```{r circaguti, echo = TRUE, eval = FALSE}
-aguti.circ <- circular::circular(aguti$time*2*pi, units = "radians", template = "clock24")
-pecari.circ <- circular::circular(pecari$time*2*pi, units = "radians", template = "clock24")
-#convertimos en radianes los valores temporales
+aguti.circ <- circular::circular(aguti$time*24, units = "hours", template = "clock24")
+pecari.circ <- circular::circular(pecari$time*24, units = "hours", template = "clock24")
+#convertimos en horas los valores temporales expresados como proporción
 
-plot (aguti.circ, main = "aguti") #Fig. 1
-plot(pecari.circ, main = "pecari")
+#Fig. 1:
+circular::rose.diag(aguti.circ, main = "agutí", bins = 24, prop = 2)
+circular::rose.diag(pecari.circ, main = "pecarí", bins = 24, prop = 2)
+#el argumento "bins" especifica el número de grupos en los que se divide la circunferencia. En nuestro caso son 24, uno por cada hora del día.
 ```
 
 
-Sin embargo, esta representación no es especialmente informativa. Es mucho más útil poder representar un histograma circular, en el que la longitud de cada barra representa la frecuencia de cada medida para cada ángulo (o unidad temporal). Para ello, podemos usar la función `windrose` del mismo paquete, pero la opción com mayor variedad de parámetros gráficos sin duda es a través de `ggplot2` usando la función `coord_polar`. Sin embargo, es preciso resaltar que estos diagramas de rosa tienden a [sesgar][sesgo_diagrama] al lector, sobre todo si el número de barras es bajo o el círculo interior pequeño. Se recomienda entonces usar la raiz cuadrada de las frecuencias como radios [@Zar1999].
+En los *diagramas de rosa*, cada sección del histograma (con forma de cuña) muestra el número de observaciones para cada rango de valores angulares (o temporales). El área del sector es proporcional a la frecuencia de cada grupo y el radio, a la raíz cuadrada de la frecuencia relativa de cada grupo. La función `coord_polar` del paquete `ggplot2` permite sin embargo muchas más opciones gráficas (Fig. 2)
 
-```{r cirhist, echo = TRUE, eval = FALSE}
-fig2 <- ggplot(frutofrq, aes(x = meses.ang, y = sqrt(numspp))) + geom_bar(stat='identity') + coord_polar() 
+```{r fig2, echo = TRUE, eval = FALSE}
+fig2 <- ggplot(frutofrq, aes(x = meses.ang, y = sqrt(numspp))) + geom_bar(stat='identity') + coord_polar() + ylim(-7,35) #gracias al parámetro ylim controlamos el círculo interno.
 ```
 
 # Principales métricas circulares: media angular, desviación estándar angular y vector *r*
 
-La estadística linear no sirve para calcular estadísticos de datos circulares. Para eso, se han desarrollado métricas circulares como la media, varianza y desviación estándard circulares. Para conocer los detalles de las mismas, se recomienda Zar [-@Zar1999]. Estas métricas son fácilmente calculables usando la función `circ.summary` del paquete `Directional`.
+La estadística linear no sirve para describir adecuadamente datos circulares. Para eso, se han desarrollado métricas circulares como la media, varianza y desviación estándar circulares. Estas métricas son fácilmente calculables usando la función `circ.summary` del paquete `Directional`. Se recuerda que los datos se pueden convertir de grados a radianes usando la fórmula $360^\circ = {2\pi}\; rad$.
 
 ```{r circmetric, echo = TRUE, eval = TRUE}
-aguti.sum <- Directional::circ.summary(aguti$time*2*pi, plot = F) 
+aguti.sum <- Directional::circ.summary(aguti$time*2*pi, plot = F) #Se convierten las proporciones en radianes multiplicando
 
 aguti.sum$mesos #media angular en radianes
 
 aguti.sum$circstd #desviación estándard circular en radianes
-
 ```
-En el caso de datos incluyendo frecuencias (como ocurre para los datos de fruto de Nouragues), se deben convertir las frecuencias en un vector único que repite cada valor angular el número de veces de su frecuencia. Una vez conseguido este vector, se podrá aplicar la función `circ.summary` como en el caso anterior. 
+
+En el caso de datos resumidos en forma de frecuencias (como ocurre para los datos de fruto de Nouragues), se deben convertir las frecuencias en un vector único que repita cada valor angular el número de veces de su frecuencia. Una vez conseguido este vector, se podrá aplicar la función `circ.summary` como en el caso anterior. 
 
 ```{r circmetricfreq, echo = TRUE, eval = TRUE}
 
-fruto <- c(rep(15,21), rep(45,23), rep(75,32), rep( 105, 31), rep(135, 29), rep(165,20), rep(195,19), rep(225,18), rep(255, 15), rep(285, 17), rep(315, 21), rep(345, 16))
+fruto <- c(rep(15,21), rep(45,23), rep(75,32), rep(105,31), rep(135,29), rep(165,20), rep(195,19), rep(225,18), rep(255, 15), rep(285,17), rep(315,21), rep(345,16))
 
-fruto.sum <-  Directional::circ.summary(fruto*pi/180, plot = F, rads = T) #convertimos en radianes los valores temporales
+fruto.sum <- Directional::circ.summary(fruto, plot = F, rads = F) 
 
+fruto.sum$MRL
 ```
-De estas métricas, *MRL* representa  el vector de la longitud de la media o vector *r*. Es un valor adimensional que se utiliza en fenología como una estima de la concentración de la actividad o la estacionalidad de la fenofase, siendo mayor cuanto más cercano a 1. Así por ejemplo, el valor de *r* = `r round(aguti.sum$MRL, 5)` para la actividad de los agutíes nos indica que está muy concentrada en el tiempo. En el caso de la fructificación en Nouragues, al estar los datos agrupados por meses, debemos multiplicar por un factor corrección $c<- (30*pi/360)/sin(30/2)$ al valor de *r* que se deriva de la función `circ.summary` `r c<- (30*pi/360)/sin(30/2)` *r* = `r round(fruto.sum$MRL*c, 2)`. El valor de *r* cercano a 0 para estos datos nos indica que la estacionalidad de la fructificación es muy baja. 
+De estas métricas, el vector *r* representa  la longitud del vector medio (llamado *MRL* por la función `circ.summary`). Es un valor adimensional que varía entre 0 y 1 y mide la dispersión de los datos (0 indica dispersión uniforme en todas las direcciones y 1, todas las observaciones apuntando en la misma dirección). El vector *r* se utiliza en fenología como una estima de la concentración de la actividad o la estacionalidad de la fenofase, siendo mayor cuanto más cercano a 1. En el caso de la fructificación en Nouragues, al estar los datos agrupados por meses, debemos multiplicar *r* por un factor de corrección $c<- (30*\pi/360)/sin(30/2)$, resultando en `r round(fruto.sum$MRL*(30*pi/360)/sin(30/2), 2)`. 
 
-# Tests de uniformidad de una muestra: test de Rayleigh como medida de estacionalidad
+# Test de uniformidad de una muestra: test de Rayleigh como medida de estacionalidad
 
-La forma de verificar estadísticamente si una distribución circular es significativamente estacional es usando el *test de Rayleigh*. Este test tiene como hipótesis nula que la distribución circular es uniforme, es decir, que no tiene una dirección media angular. Para ello, es un requisito indispensable que la distribución sea unimodal, aunque si los datos fueran bimodales y estuvieran repartidos a lo largo del círculo, podríamos trabajar con las dos medias circunferencias por separado.
+La forma de verificar estadísticamente si una distribución circular es significativamente estacional es usando el *test de Rayleigh* [@Zar1999]. La hipótesis nula es que la distribución circular es uniforme, es decir, que no hay una dirección angular preferida. El test de Rayleigh asume que la distribución de los datos es unimodal. Para distribuciones multimodales, existen otros test [ver`r citep("10.1007/s00265-018-2538-y")`].
 
 ```{r rtest, echo = TRUE, eval = TRUE}
 CircStats::r.test(fruto, degree = T)
-CircStats::r.test(aguti$time*2*pi, degree = F)
-
 ```
-Gracias a este test podemos ver que, a pesar de que el valor de *r* para Nouragues sea bajo, la fructificación es significativamente estacional, con un pico en marzo-mayo.
+Gracias a este test podemos ver que, a pesar de que el valor de *r* para Nouragues sea bajo, la fructificación es significativamente estacional, con el valor máximo en marzo (Fig. 2).
 
-# Tests entre dos distribuciones circulares: test de Mardia-Watson-Wheeler aplicado a los patrones actividad de los animales
+# Test entre dos distribuciones circulares: test de Mardia-Watson-Wheeler aplicado a los patrones actividad de los animales
 
-Muchas trabajos (ver `r citet("10.1007/s00265-014-1748-1")` como ejemplo) analizan los patrones de actividad diaria de diferentes especies animales usando el test de Mardia-Watson-Wheeler [@Batschelet1981]. Este test permite detectar si dos muestras circulares difieren significativamente entre sí de una forma no paramétrica. Para ello, las dos muestras se mezclan, se distribuyen uniformente y se calculan sus rangos circulares. Si las dos muestras son similares, la distribución de sus rangos también debería serlo, aceptándose la hipótesis nula.
+Muchos trabajos [ver `r citet("10.1007/s00265-014-1748-1")` como ejemplo] analizan los patrones de actividad diaria de diferentes especies animales usando el test de Mardia-Watson-Wheeler [@Batschelet1981]. Este test permite detectar si dos muestras circulares difieren significativamente entre sí de una forma no paramétrica. La forma más sencilla de calcular este test es usando la función `watson.wheeler.test` del paquete `circular`. 
 
-```{r density, echo = FALSE, eval = FALSE}
-dens <- density2(aguti$time, from=0.25, to=0.75)
-plot(dens)
-mod1 <- fitact(aguti$time * 2 * pi)
-plot(mod1)
-
-dens2 <- density2(pecari$time, from=0.25, to=0.75)
-plot(dens2, main = "pecari")
-mod2 <- fitact(pecari$time * 2 * pi)
-plot(mod2, main = "pecari")
-
+```{r mardiatestfalse, echo = TRUE, eval = FALSE, warning = FALSE}
+circular::watson.wheeler.test(list(aguti.circ, pecari.circ))
 ```
-La forma más sencilla de calcular este test es usando la función `watson.wheeler.test` del paquete `circular`. 
 
-```{r mardiatest, echo = TRUE, eval = TRUE, warning = FALSE}
-aguti.circ <- circular::circular(aguti$time*2*pi, units = "radians", template = "clock24")
-pecari.circ <- circular::circular(pecari$time*2*pi, units = "radians", template = "clock24")
+```{r mardiatest, echo = FALSE, eval = TRUE, warning = FALSE}
+aguti.circ <- circular::circular(aguti$time*24, units = "hours", template = "clock24")
+pecari.circ <- circular::circular(pecari$time*24, units = "hours", template = "clock24")
 
 circular::watson.wheeler.test(list(aguti.circ, pecari.circ))
-
 ```
-Usamos el ejemplo de los datos de actividad del agutí y el pecarí. Como se podía apreciar por los gráficos de la Fig. 1, el test nos demuestra que el patrón de actividad de las dos especies es significativamente diferente.
+En el ejemplo de los datos de actividad del agutí y el pecarí, tal y como se observaba en la Fig. 1, el test nos demuestra que las dos especies difieren en su patrón de actividad diaria.
 
 # Consideraciones finales
-En esta nota apenas hemos pincelado algunas aplicaciones básicas de la estadística circular  a la Ecología, especialmente para la fenología o el estudio de patrones de actividad diaria de animales, pero obviamente hay muchas más posibilidades. No hemos comentado otros tests importantes ni tampoco las correlaciones circular-linear o circular-circular por falta de espacio, por ejemplo. Gracias a la funcionalidad de los paquetes de *R* especializados en estadística circular, estas métricas y análisis están fácilmente disponibles, con lo que el usuario interesado podrá seguir avanzando en la aplicación de una poderosa herramienta estadística.
+En esta nota apenas se han esbozado algunas de las aplicaciones básicas de la estadística circular  a la Ecología, especialmente para la fenología o el estudio de patrones de actividad diaria de animales, resaltando la utilidad de esta herramienta estadística. Obviamente, hay muchas métricas y otros análisis, como las correlaciones circular-linear o circular-circular, que han quedado sin explicar por falta de espacio. Gracias a la funcionalidad de los paquetes de *R* especializados en estadística circular, estas métricas y análisis están fácilmente disponibles para el usuario interesado que quiera seguir avanzando. 
 
 El código necesario para reproducir este documento se puede consultar en [GitHub][github_nota].
 
@@ -170,7 +163,7 @@ El código necesario para reproducir este documento se puede consultar en [GitHu
 
 # Agradecimientos
 
-Esta nota es un producto del proyecto TEMPNET, financiado con una beca Marie-Sklodowska Curie (798269 - TEMPNET - H2020-MSCA-IF-2017/H2020-MSCA-IF-2017).
+Esta nota es un producto del proyecto TEMPNET, financiado con una beca Marie-Sklodowska Curie (798269 - TEMPNET - H2020-MSCA-IF-2017).
 
 
 
@@ -185,17 +178,20 @@ write.bibtex(file = "knitcitations_estadistica_circular.bib")
 
 ###### PIES DE FIGURA
 
-**Figura 1**. Diagrama circular representando la actividad diaria del agutí y el pecarí en la Isla de Barro Colorado. (Datos extraídos de Rowcliffe *et al.* 2014).
+**Figura 1**. Diagramas de rosa representando la actividad diaria del agutí y el pecarí en la Isla de Barro Colorado. (Datos extraídos de Rowcliffe *et al.* 2014).
 
-**Figura 2**. Histograma circular representando el número de especies con fruto en cada mes del año en la reserva de Nouragues (Guyana Francesa). Datos extraídos de Mendoza *et al.* 2018. El código para representar esta figura se puede ver en el texto. 
+**Figura 2**. Diagrama de rosa representando el número de especies con fruto en cada mes del año en la reserva de Nouragues (Guyana Francesa). Datos extraídos de Mendoza *et al.* 2018.  
 
 ###### FIGURA 1
 
 ```{r Fig1, echo=FALSE, fig.cap="Figura 1.", cache=FALSE, fig.fullwidth = T}
-aguti.circ <- circular::circular(aguti$time*2*pi, units = "radians", template = "clock24") #convertimos en radianes los valores temporales
-par(mfrow = c(1,2))
-plot (aguti.circ, main = "aguti")
-plot(pecari.circ, main = "pecari")
+aguti.circ <- circular::circular(aguti$time*24, units = "hours", template = "clock24")
+pecari.circ <- circular::circular(pecari$time*24, units = "hours", template = "clock24")
+#convertimos en radianes los valores temporales
+par(mfrow = c(1,2), mar = c(1,1,3,1))
+circular::rose.diag(aguti.circ, main = "agutí", bins = 24, prop = 2, shrink = 0.95)
+circular::rose.diag(pecari.circ, main = "pecarí", bins = 24, prop = 2, shrink = 0.95)
+
 ```
 
 
@@ -204,10 +200,8 @@ plot(pecari.circ, main = "pecari")
 ```{r Fig2, echo=FALSE, fig.cap="Figura 2.", cache=FALSE}
 library(ggplot2)
 
-ggplot(frutofrq, aes(x = meses.ang, y = sqrt(numspp))) + geom_bar(stat='identity') + coord_polar() + 
-scale_y_continuous( breaks = c(0,2,4,6), labels = c("0", "4", "16", "36")) +
-#ylim(0, 6.3) +
-geom_text(aes(y = 6.5, label = meses))  +  xlab(label ="meses")+ ylab(label ="número de especies en fruto") + 
+ggplot(frutofrq, aes(x = meses.ang, y = numspp)) + geom_bar(stat='identity') + coord_polar() + ylim(-7,35) +
+geom_text(aes(y = 35, label = meses))  +  xlab(label ="meses")+ ylab(label ="número de especies en fruto") + 
   theme_bw() + 
   theme(axis.text = element_text(size = 12, colour = "black"),
         axis.text.x = element_blank(),
