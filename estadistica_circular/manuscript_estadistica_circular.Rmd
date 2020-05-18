@@ -20,7 +20,7 @@ bibliography:
 
 > (1) Departamento de Ecología Integrativa. Estación Biológica de Doñana (CSIC).
 
-> Autor para correspondencia: Irene Mendoza [irene.mendoza@ebd.csic.es]
+> Autora para correspondencia: Irene Mendoza [irene.mendoza@ebd.csic.es]
 
 
 ## Palabras clave
@@ -43,7 +43,7 @@ cite_options(citation_format = "pandoc")
 
 
 
-La estadística circular es una poderosa herramienta que permite analizar variables que tienen una naturaleza cíclica y para los que la estadística linear no es apropiada. Algunos ejemplos clásicos en Ecología incluyen el estudio de la fenología de la fructificación de una especie a lo largo del año o los patrones de actividad diarios de un mamífero. En estos casos, la designación de un cero (y de valores mayores o menores) es completamente arbitraria. Por ejemplo, la diferencia entre el mes de enero y diciembre es de solo un mes en una escala circular, mientras que en una escala linear, dicha diferencia sería de 12 meses.
+La estadística circular es una poderosa herramienta que permite analizar variables que tienen una naturaleza cíclica y para los que la estadística lineal no es apropiada. Algunos ejemplos clásicos en Ecología incluyen el estudio de la fenología de una especie a lo largo del año o los patrones de actividad diarios de animales. En estos casos, la designación de un cero (y de valores mayores o menores) es completamente arbitraria. Por ejemplo, la diferencia entre el mes de enero y diciembre es de solo un mes en una escala circular, mientras que en una escala lineal, dicha diferencia sería de 12 meses.
 
 # Transformación en ángulos de nuestra variable de naturaleza circular 
 La primera transformación que debemos hacer con nuestros datos de naturaleza circular es convertirlos en ángulos mediante una simple ecuación [@Zar1999]: 
@@ -84,7 +84,7 @@ frutofrq <- data.frame(meses = month.abb, meses.ang = seq(15, 350, 30), numspp =
 
 # Representaciones gráficas de datos circulares
 
-Cualquier estadística descriptiva pasa por la representación gráfica de los datos. En el caso de datos circulares, el paquete `circular` `r citep(citation("circular"))` permite hacer diagramas de rosa convirtiendo los datos circulares en un objeto `circular` primero y usando luego `rose.diag` (Fig. 1). 
+Cualquier estadística descriptiva pasa por la representación gráfica de los datos. En el caso de datos circulares, el paquete `circular` `r citep(citation("circular"))` permite hacer *diagramas de rosa* convirtiendo los datos circulares en un objeto `circular` primero y usando luego `rose.diag` (Fig. 1). 
 
 ```{r circaguti, echo = TRUE, eval = FALSE}
 aguti.circ <- circular::circular(aguti$time*24, units = "hours", template = "clock24")
@@ -98,22 +98,22 @@ circular::rose.diag(pecari.circ, main = "pecarí", bins = 24, prop = 2)
 ```
 
 
-En los *diagramas de rosa*, cada sección del histograma (con forma de cuña) muestra el número de observaciones para cada rango de valores angulares (o temporales). El área del sector es proporcional a la frecuencia de cada grupo y el radio, a la raíz cuadrada de la frecuencia relativa de cada grupo. La función `coord_polar` del paquete `ggplot2` permite sin embargo muchas más opciones gráficas (Fig. 2)
+En los diagramas de rosa cada sección del histograma (con forma de cuña) muestra el número de observaciones para cada rango de valores angulares (o temporales). El área del sector es proporcional a la frecuencia de cada grupo y el radio, a la raíz cuadrada de la frecuencia relativa de cada grupo. La función `coord_polar` del paquete `ggplot2` permite muchas más opciones gráficas para representarlos (Fig. 2).
 
 ```{r fig2, echo = TRUE, eval = FALSE}
-fig2 <- ggplot(frutofrq, aes(x = meses.ang, y = sqrt(numspp))) + geom_bar(stat='identity') + coord_polar() + ylim(-7,35) #gracias al parámetro ylim controlamos el círculo interno.
+fig2 <- ggplot(frutofrq, aes(x = meses.ang, y = sqrt(numspp))) + geom_bar(stat='identity') + coord_polar() + ylim(-7,35) #gracias al parámetro "ylim" controlamos el círculo interno.
 ```
 
 # Principales métricas circulares: media angular, desviación estándar angular y vector *r*
 
-La estadística linear no sirve para describir adecuadamente datos circulares. Para eso, se han desarrollado métricas circulares como la media, varianza y desviación estándar circulares. Estas métricas son fácilmente calculables usando la función `circ.summary` del paquete `Directional`. Se recuerda que los datos se pueden convertir de grados a radianes usando la fórmula $360^\circ = {2\pi}\; rad$.
+La estadística linear no sirve para describir adecuadamente datos circulares. Para eso, se han desarrollado métricas circulares como la media, varianza y desviación estándar circulares. Se calculan fácilmente con la función `circ.summary` del paquete `Directional`. Se recuerda que los datos se convierten de grados a radianes usando la fórmula $360^\circ = {2\pi}\; rad$.
 
 ```{r circmetric, echo = TRUE, eval = TRUE}
-aguti.sum <- Directional::circ.summary(aguti$time*2*pi, plot = F) #Se convierten las proporciones en radianes multiplicando
+aguti.sum <- Directional::circ.summary(aguti$time*2*pi, plot = F)
 
 aguti.sum$mesos #media angular en radianes
 
-aguti.sum$circstd #desviación estándard circular en radianes
+aguti.sum$circstd #desviación estándar circular en radianes
 ```
 
 En el caso de datos resumidos en forma de frecuencias (como ocurre para los datos de fruto de Nouragues), se deben convertir las frecuencias en un vector único que repita cada valor angular el número de veces de su frecuencia. Una vez conseguido este vector, se podrá aplicar la función `circ.summary` como en el caso anterior. 
@@ -135,11 +135,11 @@ La forma de verificar estadísticamente si una distribución circular es signifi
 ```{r rtest, echo = TRUE, eval = TRUE}
 CircStats::r.test(fruto, degree = T)
 ```
-Gracias a este test podemos ver que, a pesar de que el valor de *r* para Nouragues sea bajo, la fructificación es significativamente estacional, con el valor máximo en marzo (Fig. 2).
+Gracias a este test podemos ver que, a pesar del bajo valor de *r* para Nouragues, la fructificación es significativamente estacional, con el valor máximo en marzo (Fig. 2).
 
 # Test entre dos distribuciones circulares: test de Mardia-Watson-Wheeler aplicado a los patrones actividad de los animales
 
-Muchos trabajos [ver `r citet("10.1007/s00265-014-1748-1")` como ejemplo] analizan los patrones de actividad diaria de diferentes especies animales usando el test de Mardia-Watson-Wheeler [@Batschelet1981]. Este test permite detectar si dos muestras circulares difieren significativamente entre sí de una forma no paramétrica. La forma más sencilla de calcular este test es usando la función `watson.wheeler.test` del paquete `circular`. 
+Muchos trabajos [ver `r citet("10.1007/s00265-014-1748-1")` como ejemplo] analizan los patrones de actividad diaria de diferentes especies animales usando el *test de Mardia-Watson-Wheeler* [@Batschelet1981]. Este test permite detectar si dos muestras circulares difieren significativamente entre sí de una forma no paramétrica. La forma más sencilla de calcularlo es usando la función `watson.wheeler.test` del paquete `circular`. 
 
 ```{r mardiatestfalse, echo = TRUE, eval = FALSE, warning = FALSE}
 circular::watson.wheeler.test(list(aguti.circ, pecari.circ))
@@ -159,7 +159,7 @@ En esta nota apenas se han esbozado algunas de las aplicaciones básicas de la e
 El código necesario para reproducir este documento se puede consultar en [GitHub][github_nota].
 
 [sesgo_diagrama]: https://www.data-to-viz.com/caveat/circular_bar_yaxis.html
-[github_nota]: https://github.com/iremendoza/Nota_estadistica_circular
+[github_nota]: https://github.com/ecoinfAEET/Notas_Ecosistemas/tree/master/estadistica_circular
 
 # Agradecimientos
 
