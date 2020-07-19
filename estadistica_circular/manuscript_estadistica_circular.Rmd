@@ -43,7 +43,7 @@ cite_options(citation_format = "pandoc")
 
 
 
-La estadística circular es una poderosa herramienta que permite analizar variables que tienen una naturaleza cíclica y para los que la estadística lineal no es apropiada. Algunos ejemplos clásicos en Ecología incluyen el estudio de la fenología de una especie a lo largo del año o los patrones de actividad diarios de animales. En estos casos, la designación de un cero (y de valores mayores o menores) es completamente arbitraria. Por ejemplo, la diferencia entre el mes de enero y diciembre es de solo un mes en una escala circular, mientras que en una escala lineal, dicha diferencia sería de 12 meses.
+La estadística circular es una poderosa herramienta que permite analizar variables que tienen una naturaleza cíclica para las que la estadística lineal no es apropiada. Algunos ejemplos clásicos en Ecología incluyen el estudio de la fenología de una especie a lo largo del año o los patrones de actividad diarios de animales. En estos casos, la designación de un cero (y de valores mayores o menores) es completamente arbitraria. Por ejemplo, la diferencia entre el mes de enero y diciembre es de solo un mes en una escala circular, mientras que en una escala lineal, dicha diferencia sería de 12 meses.
 
 # Transformación en ángulos de nuestra variable de naturaleza circular 
 La primera transformación que debemos hacer con nuestros datos de naturaleza circular es convertirlos en ángulos mediante una simple ecuación [@Zar1999]: 
@@ -60,7 +60,7 @@ a <- 360*45/365
 `r round(a, 2)`$^\circ$. En el caso de medidas mensuales, los 360$^\circ$ se dividen en 12 sectores de 30$^\circ$. Por convención, se considera el punto medio del sector como el correspondiente a cada mes, es decir 15$^\circ$ para enero, 45$^\circ$ para febrero, ... y 345$^\circ$ para diciembre. 
 
 # Ejemplos usados
-Usaré dos ejemplos en esta nota, uno referido a fenología de la fructificación en Nouragues (Guyana francesa) extraído de Mendoza *et al.* [-@Mendoza2018] y el otro a los patrones de actividad del agutí y del pecarí de la Isla de Barro Colorado [@Rowcliffe2014], extraídos del paquete `activity` `r citep(citation("activity"))`. Me centraré en tres de los muchos paquetes de R `r citep(citation())` que permiten analizar datos circulares: `Directional` `r citep(citation("Directional"))`, `CircStats` `r citep(citation("CircStats"))`, y `circular` `r citep(citation("circular"))`, así como el paquete `ggplot2` `r citep(citation("ggplot2"))` para las representaciones gráficas. Debido a las limitaciones de espacio de esta nota, se recomienda revisar otras referencias para tener más detalle de los métodos, fórmulas exactas y aplicaciones a la Ecología de la estadística circular [@Zar1999; @Batschelet1981; @Morellato2010; @MardiaJupp2000; @Staggemeier2020] así como otros paquetes de R disponibles para análisis circulares (p.ej. `cplots` `r citep(citation("cplots"))`. 
+Usaré dos ejemplos en esta nota, uno referido a fenología de la fructificación en Nouragues (Guyana francesa) extraído de Mendoza *et al.* [-@Mendoza2018] y el otro a los patrones de actividad del agutí y del pecarí de la Isla de Barro Colorado [@Rowcliffe2014], extraídos del paquete `activity` `r citep(citation("activity"))`. Me centraré en tres de los muchos paquetes de R `r citep(citation())` que permiten analizar datos circulares: `Directional` `r citep(citation("Directional"))`, `CircStats` `r citep(citation("CircStats"))`, y `circular` `r citep(citation("circular"))`, así como el paquete `ggplot2` `r citep(citation("ggplot2"))` para las representaciones gráficas. Debido a las limitaciones de espacio de esta nota, se recomienda revisar otras referencias para tener más detalle de los métodos, fórmulas exactas y aplicaciones a la Ecología de la estadística circular [@Zar1999; @Batschelet1981; @Morellato2010; @MardiaJupp2000; @Staggemeier2020] así como otros paquetes de R disponibles para análisis circulares (p.ej. `NPCirc` `r citep(citation("NPCirc"))`. 
 
 ```{r librarycall, eval = TRUE, echo = TRUE, warning = FALSE, message = FALSE}
 library(activity)
@@ -125,6 +125,12 @@ fruto <- c(rep(15,21), rep(45,23), rep(75,32), rep(105,31), rep(135,29), rep(165
 fruto.sum <- Directional::circ.summary(fruto, plot = F, rads = F) 
 
 fruto.sum$MRL
+
+#la forma elegante de hacer esto es con un loop: 
+#for (i in 1:12) {
+  #frut <- rep(frutofrq$meses.ang[i], frutofrq$numspp[i])
+  #if (i == 1) fruto = frut else fruto = c(fruto, frut)
+  #}
 ```
 De estas métricas, el vector *r* representa  la longitud del vector medio (llamado *MRL* por la función `circ.summary`). Es un valor adimensional que varía entre 0 y 1 y mide la dispersión de los datos (0 indica dispersión uniforme en todas las direcciones y 1, todas las observaciones apuntando en la misma dirección). El vector *r* se utiliza en fenología como una estima de la concentración de la actividad o la estacionalidad de la fenofase, siendo mayor cuanto más cercano a 1. En el caso de la fructificación en Nouragues, al estar los datos agrupados por meses, debemos multiplicar *r* por un factor de corrección $c<- (30*\pi/360)/sin(30/2)$, resultando en `r round(fruto.sum$MRL*(30*pi/360)/sin(30/2), 2)`. 
 
@@ -154,7 +160,7 @@ circular::watson.wheeler.test(list(aguti.circ, pecari.circ))
 En el ejemplo de los datos de actividad del agutí y el pecarí, tal y como se observaba en la Fig. 1, el test nos demuestra que las dos especies difieren en su patrón de actividad diaria.
 
 # Consideraciones finales
-En esta nota apenas se han esbozado algunas de las aplicaciones básicas de la estadística circular  a la Ecología, especialmente para la fenología o el estudio de patrones de actividad diaria de animales, resaltando la utilidad de esta herramienta estadística. Obviamente, hay muchas métricas y otros análisis, como las correlaciones circular-linear o circular-circular, que han quedado sin explicar por falta de espacio. Gracias a la funcionalidad de los paquetes de *R* especializados en estadística circular, estas métricas y análisis están fácilmente disponibles para el usuario interesado que quiera seguir avanzando. 
+En esta nota apenas se han esbozado algunas de las aplicaciones básicas de la estadística circular  a la Ecología, especialmente para el estudio fenológico de los patrones estacionales o de actividad diaria de diferentes organismos. Obviamente, hay muchas métricas y otros análisis, como las correlaciones circular-linear o circular-circular, que han quedado sin explicar por falta de espacio. Gracias a la funcionalidad de los paquetes de *R* especializados en estadística circular, estas métricas y análisis están fácilmente disponibles para el usuario interesado que quiera seguir avanzando. 
 
 El código necesario para reproducir este documento se puede consultar en [GitHub][github_nota].
 
@@ -185,29 +191,32 @@ write.bibtex(file = "knitcitations_estadistica_circular.bib")
 ###### FIGURA 1
 
 ```{r Fig1, echo=FALSE, fig.cap="Figura 1.", cache=FALSE, fig.fullwidth = T}
+tiff(file = "Figura1.tiff", width = 4200, height = 3200, units = "px", res = 800, compression = 'lzw')
 aguti.circ <- circular::circular(aguti$time*24, units = "hours", template = "clock24")
 pecari.circ <- circular::circular(pecari$time*24, units = "hours", template = "clock24")
 #convertimos en radianes los valores temporales
 par(mfrow = c(1,2), mar = c(1,1,3,1))
-circular::rose.diag(aguti.circ, main = "agutí", bins = 24, prop = 2, shrink = 0.95)
-circular::rose.diag(pecari.circ, main = "pecarí", bins = 24, prop = 2, shrink = 0.95)
-
+circular::rose.diag(aguti.circ, main = "agutí", bins = 24, prop = 2, shrink = 0.95, cex = 0.9)
+circular::rose.diag(pecari.circ, main = "pecarí", bins = 24, prop = 2, shrink = 0.95, cex = 0.9)
+dev.off()
 ```
 
 
 ###### FIGURA 2
 
 ```{r Fig2, echo=FALSE, fig.cap="Figura 2.", cache=FALSE}
+library(dplyr)
 library(ggplot2)
-
-ggplot(frutofrq, aes(x = meses.ang, y = numspp)) + geom_bar(stat='identity') + coord_polar() + ylim(-7,35) +
-geom_text(aes(y = 35, label = meses))  +  xlab(label ="meses")+ ylab(label ="número de especies en fruto") + 
+tiff(file = "Figura2.tiff", width = 4200, height = 3200, units = "px", res = 800, compression = 'lzw')
+frutofrq2 <- frutofrq %>% mutate(meses2 = c("ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"))
+ggplot(frutofrq2, aes(x = meses.ang, y = numspp)) + geom_bar(stat='identity') + coord_polar() + ylim(-7,35) +
+geom_text(aes(y = 35, label = meses2))  +  xlab(label ="meses")+ ylab(label ="número de especies en fruto") + 
   theme_bw() + 
   theme(axis.text = element_text(size = 12, colour = "black"),
         axis.text.x = element_blank(),
         axis.title = element_text(size = 15, colour = "black"))
 
-
+dev.off()
 ```
 
 
