@@ -2,7 +2,7 @@
 
 <br>
 
-## Qué son {#que-son}
+## Qué son
 
 Las Notas Ecoinformáticas son artículos breves de información y opinión sobre temas de ecoinformática en sentido amplio (estadística, programación, computación, reproducibilidad, ciencia de datos) que se publican en la revista [*Ecosistemas*](http://www.revistaecosistemas.net). 
 
@@ -13,7 +13,7 @@ La sección de Notas Ecoinformáticas está coordinada por [Nacho Bartomeus](htt
 
 <br>
 
-## Cómo contribuir {#como-contribuir}
+## Cómo contribuir
 
 En este repositorio de [GitHub](https://github.com/ecoinfAEET/Notas_Ecosistemas) hay un [issue abierto](https://github.com/ecoinfAEET/Notas_Ecosistemas/issues/1) para recoger propuestas de temas (y posibles responsables). Luego podemos abrir nuevos issues para discutir o recibir feedback para alguna propuesta en concreto.
 
@@ -30,7 +30,7 @@ Finalizada la revisión abierta en GitHub, los autores deberán enviar la nota a
 <br>
 
 
-## Notas Ecoinformáticas publicadas {#notas-publicadas}
+## Notas Ecoinformáticas publicadas
 
 - [Estadística circular aplicada a la Ecología](https://doi.org/10.7818/ECOS.1995)
 
