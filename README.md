@@ -1,25 +1,58 @@
 # Notas Ecoinformáticas
 
-Notas ecoinformáticas para la revista [Ecosistemas](http://www.revistaecosistemas.net).
+<br>
 
-Son notas cortas de información y opinión sobre temas de ecoinformática en sentido amplio (estadística, programación, computación, reproducibilidad, ciencia de datos). Las notas deben tener una longitud maxima de ~1000 palabras, y pueden incluir figuras y/o tablas (para contribuciones más largas pueden considerarse otros [tipos de artículo permitidos en la revista](http://www.revistaecosistemas.net/index.php/ecosistemas/about/submissions#authorGuidelines)). Deben seguirse las [instrucciones para autores de Notas](http://www.revistaecosistemas.net/index.php/ecosistemas/about/submissions#authorGuidelines) de la revista Ecosistemas, con la excepción de que las *Notas Ecoinformáticas* pueden llegar hasta unas 1000 palabras y no se necesita resumen (abstract). En caso de incluir código de R, éste debe seguir las normas de estilo especificadas [aquí](http://adv-r.had.co.nz/Style.html).
+## Qué son {#que-son}
 
-El primer párrafo de la Nota debe introducir qué problema se aborda, dando una visión general para no especialistas. El segundo debe describir la potencial solución y sus principales ventajas de forma más general. Más que un tratado exhaustivo, se recomienda el uso de ejemplos (i.e. mostrando código) y referencias a la literatura o tutoriales especializados para el que quiera saber más.
+Las Notas Ecoinformáticas son artículos breves de información y opinión sobre temas de ecoinformática en sentido amplio (estadística, programación, computación, reproducibilidad, ciencia de datos) que se publican en la revista [*Ecosistemas*](http://www.revistaecosistemas.net). 
 
-La sección de Notas Ecoinformáticas está coordinada por [Nacho Bartomeus](https://bartomeuslab.com/) y [Paco Rodríguez](http://bit.ly/frod_san), miembros del [grupo de trabajo de Ecoinformática](http://ecoinfaeet.github.io) de la [AEET](http://www.aeet.org). Si estás interesado en escribir una Nota Ecoinformática ponte en contacto con nosotros o abre un issue en este repo.
+Las notas deben tener una longitud maxima de ~1000 palabras, y pueden incluir figuras y/o tablas (para contribuciones más largas pueden considerarse otros [tipos de artículo permitidos en la revista](http://www.revistaecosistemas.net/index.php/ecosistemas/about/submissions#authorGuidelines)). Deben seguirse las [instrucciones para autores de Notas](http://www.revistaecosistemas.net/index.php/ecosistemas/about/submissions#authorGuidelines) de la revista Ecosistemas, con la excepción de que las *Notas Ecoinformáticas* pueden llegar hasta unas 1000 palabras y no se necesita resumen (abstract). Idealmente las notas deber dar una visión general para no especialistas. Más que un tratado exhaustivo, se recomienda el uso de ejemplos (i.e. mostrando código) y referencias a la literatura o tutoriales especializados para el que quiera saber más. En caso de incluir código de R, éste debe seguir las normas de estilo especificadas [aquí](http://adv-r.had.co.nz/Style.html).
+
+La sección de Notas Ecoinformáticas está coordinada por [Nacho Bartomeus](https://bartomeuslab.com/) y [Paco Rodríguez](https://frodriguezsanchez.net), miembros del [grupo de trabajo de Ecoinformática](https://ecoinfaeet.github.io/website) de la [AEET](http://www.aeet.org). 
 
 
-### Cómo contribuir
+<br>
 
-Hay un [issue abierto](https://github.com/ecoinfAEET/Notas_Ecosistemas/issues/1) para recoger propuestas de temas (y posibles responsables). Luego podemos abrir nuevos issues para discutir o recibir feedback para alguna propuesta en concreto.
+## Cómo contribuir {#como-contribuir}
+
+En este repositorio de [GitHub](https://github.com/ecoinfAEET/Notas_Ecosistemas) hay un [issue abierto](https://github.com/ecoinfAEET/Notas_Ecosistemas/issues/1) para recoger propuestas de temas (y posibles responsables). Luego podemos abrir nuevos issues para discutir o recibir feedback para alguna propuesta en concreto.
 
 Para la escritura de la nota, recomendamos la utilización de la [plantilla de Rmarkdown](https://github.com/ecoinfAEET/Notas_Ecosistemas/tree/master/template) incluida en la carpeta 'template' de este repositorio. Dicha plantilla ya está configurada para generar un documento Word siguiendo todas las normas de estilo de la revista Ecosistemas. Alternativamente, también se puede escribir la nota en cualquier procesador de texto.
 
-Una vez que tengáis lista la nota podéis subirla directamente a este repositorio haciendo un [fork y pull request](https://guides.github.com/activities/forking/). O enviarla directamente por correo a [Nacho Bartomeus](https://bartomeuslab.com/) o [Paco Rodríguez](http://bit.ly/frod_san).
+Una vez que tengáis lista la nota podéis subirla directamente a este repositorio haciendo un [pull request](https://guides.github.com/activities/forking/). O enviarla directamente por correo a [Nacho Bartomeus](https://bartomeuslab.com/) o [Paco Rodríguez](https://frodriguezsanchez.net).
 
-La revisión de las notas será totalmente abierta (open peer review) usando este repositorio. Más información sobre el proceso [aquí](https://github.com/ecoinfAEET/Notas_Ecosistemas/blob/master/Normas_revision_grupal.MD).
+La revisión de las notas será totalmente abierta (open peer review) en el repositorio de [GitHub](https://github.com/ecoinfAEET/Notas_Ecosistemas). Más información sobre el proceso [aquí](https://github.com/ecoinfAEET/Notas_Ecosistemas/blob/master/Normas_revision_grupal.MD).
 
 Finalizada la revisión abierta en GitHub, los autores deberán enviar la nota a Ecosistemas utilizando el sistema normal de envío de la revista.
 
 ¡Gracias a todos por participar!
+
+<br>
+
+
+## Notas Ecoinformáticas publicadas {#notas-publicadas}
+
+- [Estadística circular aplicada a la Ecología](https://doi.org/10.7818/ECOS.1995)
+
+- [Compartiendo datos en ecología: cómo añadir más valor a los datos](https://doi.org/10.7818/ECOS.1838)
+
+- [Cómo crear paquetes en R](https://doi.org/10.7818/ECOS.1948)
+
+- [Cómo escribir funciones en R](https://doi.org/10.7818/ECOS.1880)
+
+- [Inferencia estadística a partir de varios modelos y su utilidad en ecología](https://doi.org/10.7818/ECOS.1699)
+
+- [Ventajas de la estadística bayesiana frente a la frecuentista: ¿por qué nos resistimos a usarla?](https://doi.org/10.7818/ECOS.1591)
+
+- [Sobre el intercambio de datos de vegetación: el estándar ‘Veg-X’ y el paquete de R ‘VegX’](https://doi.org/10.7818/ECOS.1570)
+
+- [¿Por qué usar GitHub? Diez pasos para disfrutar de GitHub y no morir en el intento](https://www.revistaecosistemas.net/index.php/ecosistemas/article/view/1604)
+
+- [Procesadores de texto Markup: más allá de MS Word](https://doi.org/10.7818/ECOS.2017.26-3.14)
+
+- [Ajuste, interpretación y presentación de modelos lineales: el valor p no es suficiente](https://doi.org/10.7818/ECOS.2017.26-2.08)
+
+- [rOpenSci: cómo acceder de forma reproducible a repositorios de datos públicos](https://doi.org/10.7818/ECOS.2017.26-1.20)
+
+
 
