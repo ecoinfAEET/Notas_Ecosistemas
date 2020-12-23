@@ -22,12 +22,11 @@ bibliography:
 
 # Palabras clave
 
-> programming; R; reproducibility
-
+> flujo de trabajo; programación; R; reproducibilidad
 
 # Keywords
 
-> programación; R; reproducibilidad
+> programming; R; reproducibility; workflow
 
 
 
@@ -39,21 +38,19 @@ cite_options(citation_format = "pandoc")
 
 
 
-# Introducción 
+La mayoría de los ecólogos que escribimos código informático para desarrollar nuestros análisis somos autodidactas [@Hernandez_2012]. Nunca hemos recibido formación sobre buenas prácticas de programación [@Wilson_2014; @Wilson_2017; @Rodriguez_Sanchez_2016]. En consecuencia, nuestro código es a menudo ineficiente, desordenado, propenso a errores, difícil de revisar y reutilizar. 
 
-La mayoría de los ecólogos que escribimos código informático para desarrollar nuestros análisis somos autodidactas [@Hernandez_2012]. Nunca hemos recibido formación sobre buenas prácticas de programación o cómo escribir código 'limpio', eficiente y bien estructurado [@Wilson_2014; @Wilson_2017; @Rodriguez_Sanchez_2016]. Tampoco es frecuente recibir comentarios sobre cómo mejorar un código existente. En consecuencia, nuestro código a menudo es ineficiente, desordenado, proclive a contener errores, difícil de revisar y reutilizar. 
-
-En esta nota se recogen 15 breves consejos para mejorar nuestro flujo de trabajo y programación en lenguaje R `r citep(citation())`. R se ha convertido en la herramienta estadística y lenguaje de programación más popular en ecología [@Lai_2019]. Estos consejos pretenden evitar errores frecuentes y mejorar la calidad del código desarrollado en nuestros análisis. 
+En esta nota se recogen 15 recomendaciones para mejorar nuestro flujo de trabajo y programación particularmente en lenguaje R `r citep(citation())` (aunque muchas de estas buenas prácticas sean igualmente aplicables a otros lenguajes). R se ha convertido en la herramienta estadística y lenguaje de programación más popular en ecología [@Lai_2019]. Estas recomendaciones pretenden evitar errores frecuentes y mejorar la calidad del código desarrollado en nuestros análisis. 
 
 
 ## 1. Utiliza un sistema de control de versiones
 
-En lugar de guardar distintas versiones de nuestro código como `script_v1`, `script_v2`, etc., es muy recomendable utilizar herramientas como `git` que permiten tener un archivo perfectamente organizado de todos los cambios realizados en datos y código. `git` registra minuciosamente quién hizo qué, cuándo y por qué, y permite comparar y recuperar versiones anteriores. Cuando además se combina `git` con plataformas como GitHub, GitLab o Bitbucket, se facilita enormemente el desarrollo colaborativo de proyectos [@Blischak_2016]. No obstante, debe tenerse en cuenta que `git` está diseñado para trabajar con archivos no muy grandes y de texto plano (código, datos en formato CSV, etc.).
+En lugar de guardar distintas versiones de nuestro código como `script_v1`, `script_v2`, etc., es muy recomendable utilizar herramientas como `git` (https://git-scm.com) que permiten tener un archivo perfectamente organizado de todos los cambios realizados en datos y código. `git` registra minuciosamente quién hizo qué, cuándo y por qué, y permite comparar y recuperar versiones anteriores. Cuando además se combina con plataformas como GitHub, GitLab o Bitbucket, se facilita enormemente el desarrollo colaborativo de proyectos [@Blischak_2016]. 
 
 
 ## 2. Utiliza una estructura estándar de proyecto
 
-Idealmente, todos los archivos relacionados con un proyecto (datos, código, figuras, etc.) deben alojarse en la misma carpeta [@Wilson_2017; @cooper_guide_2017]. Esto facilita la organización y la colaboración (al hacer el proyecto fácilmente portable). 
+Idealmente, todos los archivos relacionados con un proyecto (datos, código, figuras, etc.) deben alojarse en la misma carpeta [@Wilson_2017; @cooper_guide_2017], por ejemplo aprovechando la infraestructura de [proyectos de RStudio](https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects). Utiliza el paquete `here` `r citep(citation("here"))` o `rprojroot` `r citep(citation("rprojroot"))` para especificar las rutas a los diferentes archivos dentro del proyecto.
 
 
 ## 3. Añade un fichero README
@@ -71,17 +68,17 @@ source("fit_model.R")
 source("generate_report.R")
 ```
 
-Herramientas como `drake` `r citep(citation("drake"))` o `targets` `r citep(citation("targets"))` permiten un control mucho más potente del flujo de trabajo, ejecutando solo aquello que necesita actualización, permitiendo paralelizar, etc.
+Paquetes como `drake` `r citep(citation("drake"))` o `targets` `r citep(citation("targets"))` permiten un control mucho más potente del flujo de trabajo, ejecutando solo aquello que necesita actualización, permitiendo paralelizar, etc.
 
 
 ## 5. Evita guardar el *workspace*
 
-En general, es preferible no guardar el espacio de trabajo (*workspace*, fichero `.RData`) al finalizar cada sesión de trabajo, para evitar la acumulación de objetos innecesarios en memoria. En su lugar, debemos guardar siempre el código fuente, y guardar opcionalmente aquellos objetos (p. ej. usando `saveRDS`) que requieren computación larga o costosa [@bryan_what_2019].
+En general, es preferible no guardar el espacio de trabajo (*workspace*, fichero `.RData`) al finalizar cada sesión de trabajo, para evitar la acumulación de objetos innecesarios en memoria. En su lugar, debemos guardar siempre el código fuente y guardar opcionalmente aquellos objetos (p. ej. usando `saveRDS`) que requieren computación larga o costosa [@bryan_what_2019].
 
 
 ## 6. Aprovecha las ventajas de Rmarkdown
 
-Rmarkdown (https://rmarkdown.rstudio.com) permite integrar texto y código (no solo de R) y generar documentos dinámicos que reproducen todo el proceso de análisis, incluyendo además todos los resultados (gráficas, tablas, etc.). Así, Rmarkdown facilita la colaboración y comunicación de resultados, y reduce drásticamente el número de errores [@cooper_guide_2017].
+Rmarkdown (https://rmarkdown.rstudio.com) permite integrar texto y código (no solo de R) y generar documentos dinámicos (incluyendo tablas, figuras, etc) que reproducen todo el proceso de análisis. Así, Rmarkdown facilita la colaboración y comunicación de resultados, y reduce drásticamente el número de errores [@cooper_guide_2017].
 
 
 ## 7. Aprovecha las herramientas que ayudan a escribir mejor código
@@ -91,22 +88,24 @@ Paquetes como `fertile` `r citep(list("10.1002/sta4.332", citation("fertile")))`
 
 ## 8. Comenta tu código
 
-Utiliza los comentarios para guiar al lector, distinguir subsecciones, o explicar por qué se hacen las cosas de una determinada manera.
+Utiliza los comentarios para guiar al lector, [distinguir subsecciones](https://support.rstudio.com/hc/en-us/articles/200484568-Code-Folding-and-Sections), o explicar por qué se hacen las cosas de una determinada manera.
 
 
 ## 9. Utiliza nombres memorables
 
-Utiliza nombres con significado que evoquen/resuman el contenido del objeto (p. ej. `modelo.aditivo`, `modelo.interactivo` en lugar de `m1`, `m2`).
+Utiliza nombres con significado que resuman el contenido o función del objeto (p. ej. `modelo_aditivo`, `modelo_interactivo` en lugar de `m1`, `m2`); ver https://style.tidyverse.org/syntax.html.
 
 
 ## 10. Documenta los datos
 
-Prepara metadatos explicando qué representa cada variable (medidas, unidades, etc.), autores, licencia de utilización, etc. Herramientas como `dataspice` `r citep(citation("dataspice"))` facilitan enormemente esta tarea, y mejoran la visibilización y potencial de reutilización de los datos. 
+Prepara metadatos explicando qué representa cada variable (tipo de medida, unidades), autores, licencia de uso... Herramientas como `dataspice` `r citep(citation("dataspice"))` facilitan enormemente esta tarea, y mejoran la visibilidad y potencial de reutilización de los datos. 
 
 
 ## 11. Comprueba los datos antes del análisis
 
-En cualquier análisis es bastante probable que los datos de partida contengan errores, introducidos al teclear los datos, importarlos o manipularlos. Por tanto es fundamental comprobar la calidad de los datos antes del análisis. Para ello, paquetes como `assertr` `r citep(citation("assertr"))` o `pointblank` `r citep(citation("pointblank"))` resultan muy útiles. Por ejemplo, el siguiente código
+En cualquier proyecto puede ocurrir que los datos de partida contengan errores (introducidos al teclear los datos, importarlos o manipularlos). Por tanto es fundamental comprobar la calidad de los datos antes del análisis. Para ello, paquetes como `assertr` `r citep(citation("assertr"))`, `validate` `r citep(citation("validate"))` o `pointblank` `r citep(citation("pointblank"))` resultan muy útiles. 
+
+Por ejemplo, el siguiente código
 
 ```{r echo=TRUE, eval=FALSE}
 library("assertr")
@@ -128,17 +127,17 @@ output %>%
   assert(within_bounds(0, 1), result)
 ```
 
-Tales comprobaciones son muy útiles para detectar posibles errores en nuestro código, cambios inesperados en paquetes, etc., que producen resultados erróneos.
+Tales comprobaciones son muy útiles para detectar posibles errores en nuestro código, cambios inesperados en paquetes, etc.
 
 
 ## 13. Escribe código modular
 
-Los *scripts* de código largos y desorganizados son más difíciles de revisar y, por tanto, más proclives a contener errores. Es conveniente escribir código modular, por ejemplo, partiendo un *script* largo en varios pequeños (p. ej. `prepare_data.R`, `run_analysis.R`, `make_figures.R`), o escribiendo funciones con un cometido específico e independientes del código principal del análisis.
+Los *scripts* de código largos y desorganizados son más difíciles de revisar y, por tanto, más proclives a contener errores. Es conveniente escribir código modular; por ejemplo, partiendo un *script* largo en varios pequeños, o escribiendo funciones con un cometido específico e independientes del código principal del análisis.
 
 
 ## 14. Evita repeticiones
 
-A menudo necesitamos ejecutar unas líneas de código repetidamente. Por ejemplo, para repetir una figura con distintas especies: 
+A menudo necesitamos ejecutar unas líneas de código repetidamente. Por ejemplo, para producir una figura con distintas especies: 
 
 ```{r echo=TRUE, eval=FALSE}
 dataset %>% 
@@ -152,12 +151,11 @@ dataset %>%
   geom_point(aes(x, y))
 ```
 
-Estas repeticiones conducen a *scripts* de código largos, difíciles de editar y revisar, y por tanto más proclives a errores. 
-
 ¿Cómo podemos evitar repetirnos? Una opción podría ser escribir un bucle (`for loop`) con iteraciones para cada especie:
 
 ```{r echo=TRUE, eval=FALSE}
 species <- c("Laurus nobilis", "Laurus azorica")
+
 for (i in species) {
   dataset %>% 
     filter(species == i) %>% 
@@ -194,10 +192,15 @@ purrr:::map(species, plot_species, data = dataset)
 
 Todo análisis depende de un conjunto de paquetes que conviene documentar de manera consistente e interpretable. Ello nos permite, por ejemplo, ejecutar fácilmente el análisis en otro ordenador, o recrear el entorno computacional tras una actualización.
 
-Existen muchas opciones de documentar las dependencias de nuestro análisis, desde la función `sessionInfo`, paquetes como `automagic` `r citep(citation("automagic"))` o `renv` `r citep(citation("renv"))` que guardan un fichero de texto con todos los paquetes utilizados (y sus versiones), a paquetes como `containerit` que facilitan la creación de un 'dockerfile' para recrear el entorno computacional en cualquier computadora [@N_st_2020].
+Existen muchas opciones de documentar las dependencias de nuestro análisis, desde la función `sessionInfo`, paquetes como `automagic` `r citep(citation("automagic"))` o `renv` `r citep(citation("renv"))` que registran todos los paquetes utilizados (y sus versiones), a paquetes como `containerit` que facilitan la creación de un 'dockerfile' para recrear el entorno computacional en cualquier computadora [@N_st_2020].
 
 
-Muchas de estas medidas son fáciles de implementar y no requieren grandes cambios en la organización del trabajo ni el estilo de programación, no obstante pueden contribuir a mejorar notablemente la calidad del código desarrollado para nuestros análisis, redundando por tanto en beneficios tanto para el programador como sus colaboradores y revisores.
+Muchas de estas medidas son fáciles de implementar y no requieren grandes cambios en la organización del trabajo ni el estilo de programación; no obstante pueden contribuir a mejorar notablemente la calidad del código desarrollado para nuestros análisis, redundando por tanto en beneficios tanto para el programador como sus colaboradores y revisores.
+
+
+###### AGRADECIMIENTOS
+
+Al Integrative Ecology Group, por incitar a la escritura de esta nota, y al grupo de Ecoinformática de la AEET (en particular a Antonio Pérez-Luque, Ruth Delgado, Hugo Saiz, Alfonso Garmendia, Aitor Ameztegui, David García-Callejas e Ignasi Bartomeus), por sus sugerencias para mejorarla.
 
 
 
@@ -213,7 +216,7 @@ write.bibtex(file = "knitcitations.bib")
 
 ###### TABLA 1
 
-**Tabla 1**. Quince consejos para mejorar nuestro código y flujo de trabajo en R.
+**Tabla 1**. Quince recomendaciones para mejorar nuestro código y flujo de trabajo en R.
 
 ```{r Tabla1, results='asis', echo=FALSE, cache=FALSE}
 library("knitr")
@@ -239,3 +242,13 @@ kable(tabla)
 
 
 
+###### PIES DE FIGURA
+
+**Figura 1**. Ejemplo de estructura de proyecto. Existe un fichero README (normalmente en formato markdown) con información general del proyecto (**recomendación nº 3**), un fichero especificando la licencia de uso de los datos y/o código, un fichero registrando las dependencias (**recomendación nº 15**), un *script* maestro o 'makefile' que ejecuta los distintos pasos del análisis en el orden correcto (**recomendación nº 4**), una carpeta de datos separando datos brutos y procesados, y una carpeta de análisis que contiene el código para generar las figuras finales y documentos Rmarkdown (**recomendación nº 6**) con los distintos pasos del análisis (**recomendación nº 13**).
+
+
+###### FIGURA 1
+
+```{r Fig1, echo=FALSE, fig.cap="Figura 1. Ejemplo de estructura de proyecto. Existe un fichero README (normalmente en formato markdown) con información general del proyecto (**recomendación nº 3**), un fichero especificando la licencia de uso de los datos y/o código, un fichero registrando las dependencias (**recomendación nº 15**), un *script* maestro o 'makefile' que ejecuta los distintos pasos del análisis en el orden correcto (**recomendación nº 4**), una carpeta de datos separando datos brutos y procesados, y una carpeta de análisis que contiene el código para generar las figuras finales y documentos Rmarkdown (**recomendación nº 6**) con los distintos pasos del análisis (**recomendación nº 13**).", cache=FALSE}
+knitr::include_graphics("Fig1.png")
+```
