@@ -1,5 +1,5 @@
 ---
-title: "| Nota ecoinformática sobre... \n"
+title: "Nota ecoinformática sobre..."
   
 author: Nombre Apellidos^1^, Nombre Apellidos^2^
   
@@ -12,6 +12,7 @@ output:
     reference_docx: Ecosistemas_template.docx
     
 csl: ecosistemas.csl
+
 bibliography: 
   - references.bib
   - knitcitations.bib
