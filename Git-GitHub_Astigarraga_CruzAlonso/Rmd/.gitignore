@@ -26,4 +26,6 @@ vignettes/*.pdf
 *.knit.md
 # R Environment Variables
 .Renviron
+nota_git_github.Rproj
 git_github.docx
+revision
