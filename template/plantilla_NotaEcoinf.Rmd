@@ -37,10 +37,10 @@ bibliography:
 
 
 
-```{r knitcitations, echo=FALSE, cache = FALSE}
+```{r knitcitations, echo = FALSE, cache = FALSE}
 library(knitcitations)
 cleanbib()   
-cite_options(citation_format = "pandoc")
+options("citation_format" = "pandoc")
 ```
 
 
@@ -65,7 +65,7 @@ $$
 model <- lm(y ~ x)
 ```
 
-Utilizamos R `r citep(citation())` y Rmarkdown `r citep(list(citation("knitr"), citation("rmarkdown")))` para todos nuestros análisis. Para ajustar los modelos mixtos utilizamos `lme4` `r citep(citation("lme4"))`.
+Utilizamos R `r citep(citation())` y Rmarkdown `r citep(citation("rmarkdown"))` para todos nuestros análisis. Para ajustar los modelos mixtos utilizamos `lme4` `r citep(citation("lme4"))`.
 
 
 
