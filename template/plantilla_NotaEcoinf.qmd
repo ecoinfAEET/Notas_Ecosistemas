@@ -113,7 +113,7 @@ write.bibtex(file = "knitcitations.bib")
 #| output: asis
 #| echo: false
 #| cache: false
-library("knitr")
+library(knitr)
 kable(head(iris))
 ```
 

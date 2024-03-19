@@ -104,7 +104,7 @@ write.bibtex(file = "knitcitations.bib")
 **Table 1**. Table heading in English.
 
 ```{r Tabla1, results = 'asis', echo = FALSE, cache = FALSE}
-library("knitr")
+library(knitr)
 kable(head(iris))
 ```
 
