@@ -50,7 +50,7 @@ La sección de Notas Ecoinformáticas está coordinada por [Verónica Cruz Alons
 
 ## Cómo contribuir
 
-En este [repositorio de GitHub](https://github.com/ecoinfAEET/Notas_Ecosistemas) hay un [issue abierto](https://github.com/ecoinfAEET/Notas_Ecosistemas/issues/1) para recoger propuestas de temas (y posibles responsables). Para cualquier duda, puede contactarse directamente por correo a Verónica Cruz Alonso ([veronica.cral\@gmail.com](mailto:veronica.cral@gmail.com){.email}) y Julen Astigarraga ([julenastigarraga\@gmail.com](mailto:julenastigarraga@gmail.com){.email}).
+En este [repositorio de GitHub](https://github.com/ecoinfAEET/Notas_Ecosistemas) hay un [issue abierto](https://github.com/ecoinfAEET/Notas_Ecosistemas/issues/1) para recoger propuestas de temas (y posibles responsables). Para cualquier duda, puede contactarse directamente por correo a Verónica Cruz Alonso ([veronica.cral\@gmail.com](mailto:veronica.cral@gmail.com)) y Julen Astigarraga ([julenastigarraga\@gmail.com](mailto:julenastigarraga@gmail.com)).
 
 Para la escritura de la nota, recomendamos la utilización de la [plantilla de Quarto o Rmarkdown](https://github.com/ecoinfAEET/Notas_Ecosistemas/tree/master/template) incluida en la carpeta 'template' de este repositorio. Dicha plantilla ya está configurada para generar un documento Word siguiendo todas las normas de estilo de la revista *Ecosistemas*. Alternativamente, también se puede escribir la nota en cualquier procesador de texto siguiendo las [directrices para autores](http://www.revistaecosistemas.net/index.php/ecosistemas/about/submissions#authorGuidelines) de la revista.
 
