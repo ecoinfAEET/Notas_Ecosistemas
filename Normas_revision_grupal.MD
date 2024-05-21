@@ -12,6 +12,6 @@ Las [Notas Ecoinformáticas](https://ecoinfaeet.github.io/website/notas-ecoinfor
 
 5)  Los editores moderarán el proceso y aceptarán la nota una vez se haya completado la discusión. Si finalizado el proceso de revisión, la nota aún no se considerase apta para su publicación, podría ser rechazada.
 
-6)  Los autores enviará la nota a <https://www.revistaecosistemas.net> para su maquetación.
+6)  Los autores enviarán la nota a <https://www.revistaecosistemas.net> para su maquetación.
 
 Se seguirá en todo momento un código de conducta que sea inclusivo y respetuoso, siguiendo las directrices fijadas [aquí](https://ropensci.org/code-of-conduct/).
