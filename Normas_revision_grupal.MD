@@ -2,7 +2,7 @@
 
 Las [Notas Ecoinformáticas](https://ecoinfaeet.github.io/website/notas-ecoinformaticas.html) se revisarán mediante un proceso abierto y dinámico. Eso quiere decir que cualquier persona puede hacer sugerencias o comentarios sobre los manuscritos para mejorar su contenido (ver [ejemplo](https://github.com/ecoinfAEET/Notas_Ecosistemas/issues/4)). El proceso es el siguiente:
 
-1)  Los autores subirán la nota al [repositorio de GitHub](https://github.com/ecoinfAEET/Notas_Ecosistemas) (vía pull request o vía los editores Verónica Cruz Alonso (veronica.cral@gmail.com) o Julen Astigarraga (julenastigarraga@gmail.com)).
+1)  Los autores subirán la nota al [repositorio de GitHub](https://github.com/ecoinfAEET/Notas_Ecosistemas) (vía [pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request?tool=webui&platform=windows) o vía los editores Verónica Cruz Alonso (veronica.cral@gmail.com) o Julen Astigarraga (julenastigarraga@gmail.com)).
 
 2)  Los editores revisarán la nota y, si se considera apta, se colgará en este [repositorio](https://github.com/ecoinfAEET/Notas_Ecosistemas) de GitHub y se iniciará el proceso de revisión abierta, anunciándolo en los diversos [canales de comunicación](https://ecoinfaeet.github.io/website/) del grupo de Ecoinformática. Para llevar a cabo este proceso es necesario que los autores generen una [cuenta en GitHub](https://github.com/).
 
