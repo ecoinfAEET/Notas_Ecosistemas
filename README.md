@@ -16,6 +16,10 @@ La sección de Notas Ecoinformáticas está coordinada por [Verónica Cruz Alons
 
 ## Notas Ecoinformáticas publicadas
 
+-   [Tidyverse: colección de paquetes de R para la ciencia de datos](https://doi.org/10.7818/ECOS.2745)
+
+-   [Camelot: Una herramienta intuitiva para el manejo y procesamiento de imágenes de cámaras trampa utilizando inteligencia artificial](https://doi.org/10.7818/ECOS.2797)
+
 -   [La unión hace la fuerza: modelos de distribución de especies integrando diferentes fuentes de datos](https://doi.org/10.7818/ECOS.2527)
 
 -   [¡Se puede entender cómo funcionan Git y GitHub!](https://doi.org/10.7818/ECOS.2332)
@@ -54,8 +58,8 @@ En este [repositorio de GitHub](https://github.com/ecoinfAEET/Notas_Ecosistemas)
 
 Para la escritura de la nota, recomendamos la utilización de la [plantilla de Rmarkdown o de Quarto](https://github.com/ecoinfAEET/Notas_Ecosistemas/tree/master/template) incluida en la carpeta 'template' de este repositorio. Dicha plantilla ya está configurada para generar un documento Word siguiendo todas las normas de estilo de la revista *Ecosistemas*. Alternativamente, también se puede escribir la nota en cualquier procesador de texto siguiendo las [directrices para autores](http://www.revistaecosistemas.net/index.php/ecosistemas/about/submissions#authorGuidelines) de la revista.
 
-La nota debe enviarse a través de la [plataforma](https://www.revistaecosistemas.net/index.php/ecosistemas/about/submissions) de la revista. Tras una revisión inicial por parte de los editores, comenzará un período de **revisión abierta** (open peer review) en el [repositorio de GitHub](https://github.com/ecoinfAEET/Notas_Ecosistemas). Para llevar a cabo este proceso es necesario que los autores generen una [cuenta en GitHub](https://github.com/). El proceso de revisión, y si procede el de publicación, se llevarán a cabo siguiendo [las normas de revisión grupal](https://github.com/ecoinfAEET/Notas_Ecosistemas/blob/master/Normas_revision_grupal.MD) y [las directrices para los revisores de las notas](https://github.com/ecoinfAEET/Notas_Ecosistemas/blob/master/directrices_revisores.MD).
+La nota se debe subir al [repositorio de GitHub](https://github.com/ecoinfAEET/Notas_Ecosistemas) (vía pull request o vía los editores Julen/Verónica). Tras una revisión inicial por parte de los editores, comenzará un período de **revisión abierta** (open peer review) en el [repositorio de GitHub](https://github.com/ecoinfAEET/Notas_Ecosistemas). Para llevar a cabo este proceso es necesario que los autores generen una [cuenta en GitHub](https://github.com/). El proceso de revisión, y si procede el de publicación, se llevarán a cabo siguiendo [las normas de revisión grupal](https://github.com/ecoinfAEET/Notas_Ecosistemas/blob/master/Normas_revision_grupal.MD) y [las directrices para los revisores de las notas](https://github.com/ecoinfAEET/Notas_Ecosistemas/blob/master/directrices_revisores.MD).
 
-Finalizada la revisión abierta en GitHub, los autores deberán enviar la versión revisada de la nota utilizando de nuevo la [plataforma](https://www.revistaecosistemas.net/index.php/ecosistemas/about/submissions) de la revista.
+Finalizada la revisión abierta en GitHub, los autores deberán enviar la versión revisada de la nota a través de la [plataforma](https://www.revistaecosistemas.net/index.php/ecosistemas/about/submissions) de la revista.
 
 ¡Gracias a todos por participar!

@@ -84,11 +84,19 @@ Texto.
 
 Texto.
 
+# Contribución de los autores
+
+Texto.
+
+# Ciencia abierta
+
+Texto.
+
 # Agradecimientos
 
-Agradecimientos.
+Texto.
 
-###### REFERENCIAS
+# Referencias
 
 ```{r write_citations, cache = FALSE, include = FALSE}
 write.bibtex(file = "knitcitations.bib")
