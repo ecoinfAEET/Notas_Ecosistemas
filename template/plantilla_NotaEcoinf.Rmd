@@ -18,21 +18,21 @@ bibliography:
   - knitcitations.bib
 ---
 
-> (1) Departmento de Ecología ....
+> (1) Institución 1
 
-> (2) Otra institución
+> (2) Institución 2
 
-> Autor para correspondencia: Author One [[author\@gmail.com](mailto:author@gmail.com){.email}]
+> Autor de correspondencia\*: Nombre Apellidos [[author\@gmail.com](mailto:author@gmail.com){.email}]
 
 # Palabras clave
 
-> keyword1; keyword2; keyword3; keyword4
+> palabraclave1; palabraclave2; palabraclave3; palabraclave4
 
 # Keywords
 
 > keyword1; keyword2; keyword3; keyword4
 
-```{r knitcitations, echo = FALSE, cache = FALSE}
+```{r knitcitations, echo = FALSE, cache = FALSE, warning = FALSE}
 library(knitcitations)
 cleanbib()   
 options("citation_format" = "pandoc")
@@ -88,13 +88,9 @@ Texto.
 
 Texto.
 
-# Ciencia abierta
-
-Texto.
-
 # Agradecimientos
 
-Texto.
+Esta nota se ha revisado siguiendo un proceso colaborativo y público disponible en (link al issue correspondiente).
 
 # Referencias
 
@@ -107,11 +103,11 @@ write.bibtex(file = "knitcitations.bib")
 
 ###### TABLA 1
 
-**Tabla 1**. Cada tabla debe aportar su correspondiente encabezamiento explicativo. En los Artículos de investigación, de revisión y Comunicaciones breves se aportarán los encabezamientos tanto en castellano como en inglés, en letra Arial 10 y en página independiente. Es importante que sean simples y que no superen el ancho una página DIN A4 vertical. Los originales se deben aportar en formato tabla y no en formato imagen.
+**Tabla 1**. Cada tabla debe tener su correspondiente encabezamiento explicativo. En los artículos de investigación, de revisión y comunicaciones breves se aportarán los encabezamientos tanto en castellano como en inglés, en letra Arial 10 y en una página independiente. Es importante que las tablas sean simples y que no superen el ancho una página DIN A4 vertical. Los originales se deben aportar en formato tabla y no en formato imagen.
 
 **Table 1**. Table heading in English.
 
-```{r Tabla1, results = 'asis', echo = FALSE, cache = FALSE}
+```{r Tabla1, results = 'asis', echo = FALSE, cache = FALSE, warning = FALSE}
 library(knitr)
 kable(head(iris))
 ```
