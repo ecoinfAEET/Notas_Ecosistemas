@@ -16,15 +16,15 @@ bibliography:
   - knitcitations.bib
 ---
 
-> (1) Departmento de Ecología ....
+> (1) Institución 1
 
-> (2) Otra institución
+> (2) Institución 2
 
-> Autor para correspondencia: Author One \[[author\@gmail.com](mailto:author@gmail.com){.email}\]
+> Autor de correspondencia\*: Nombre Apellidos \[[author\@gmail.com](mailto:author@gmail.com){.email}\]
 
 # Palabras clave
 
-> keyword1; keyword2; keyword3; keyword4
+> palabraclave1; palabraclave2; palabraclave3; palabraclave4
 
 # Keywords
 
@@ -33,14 +33,15 @@ bibliography:
 ```{r knitcitations}
 #| echo: false
 #| cache: false
+#| warning: false
 library(knitcitations)
 cleanbib()   
 cite_options(citation_format = "pandoc")
 ```
 
-Esta es una plantilla para escribir [Notas Ecoinformáticas](https://ecoinfaeet.github.io/website/notas-ecoinformaticas.html) en formato Quarto para la revista [Ecosistemas](www.revistaecosistemas.net). Para saber más sobre Quarto, visite <https://quarto.org/>. La diferencia principal de Quarto respecto a Rmarkdown es que se ha generado para la colaboración de más de una comunidad (es decir, no solo usuarios de R o Python) y utiliza una sintaxis y formato compartido entre distintos lenguajes. Para ver un ejemplo de Nota Ecoinformática escrita íntegramente en Rmarkdown, visite <https://github.com/ecoinfAEET/Notas_Ecosistemas/blob/master/consejos_mejor_codigo/consejos_mejor_codigo.Rmd>.
+Esta es una plantilla para escribir [Notas Ecoinformáticas](https://ecoinfaeet.github.io/website/notas-ecoinformaticas.html) en formato Quarto para la revista [Ecosistemas](www.revistaecosistemas.net). Para saber más sobre Quarto, visite <https://quarto.org/>. La diferencia principal de Quarto respecto a Rmarkdown es que se ha generado para la colaboración de más de una comunidad (es decir, no solo usuarios de R o Python) y utiliza una sintaxis y formato compartido entre distintos lenguajes.
 
-Hay varias formas de citar bibliografía (véase <https://quarto.org/docs/authoring/footnotes-and-citations.html>). Una de ellas requiere simplemente adjuntar un fichero BibTex con todas las referencias (en este ejemplo `references.bib`), y citar cada una de ellas usando su 'CitationKey' [e.g. @Yan2011; @Sutherland2011]. También pueden buscarse referencias en internet, citar utilizando el DOI, o conectarse a una bibliografía de Zotero (ver <https://quarto.org/docs/visual-editor>).
+Hay varias formas de citar bibliografía (véase <https://quarto.org/docs/authoring/footnotes-and-citations.html>). Una de ellas requiere simplemente adjuntar un fichero BibTex con todas las referencias (en este ejemplo `references.bib`), y citar cada una de ellas usando su 'CitationKey' [e.g. @Yan2011; @Sutherland2011]. También pueden buscarse referencias en internet, citar utilizando el DOI o conectarse a una bibliografía de Zotero (ver <https://quarto.org/docs/visual-editor>).
 
 ## Cómo incluir ejemplos
 
@@ -92,13 +93,9 @@ Texto.
 
 Texto.
 
-# Ciencia abierta
-
-Texto.
-
 # Agradecimientos
 
-Texto.
+Esta nota se ha revisado siguiendo un proceso colaborativo y público disponible en (link al issue correspondiente).
 
 # Referencias
 
@@ -113,7 +110,7 @@ write.bibtex(file = "knitcitations.bib")
 
 ###### TABLA 1
 
-**Tabla 1**. Cada tabla debe aportar su correspondiente encabezamiento explicativo. En los Artículos de investigación, de revisión y Comunicaciones breves se aportarán los encabezamientos tanto en castellano como en inglés, en letra Arial 10 y en página independiente. Es importante que sean simples y que no superen el ancho una página DIN A4 vertical. Los originales se deben aportar en formato tabla y no en formato imagen.
+**Tabla 1**. Cada tabla debe tener su correspondiente encabezamiento explicativo. En los artículos de investigación, de revisión y comunicaciones breves se aportarán los encabezamientos tanto en castellano como en inglés, en letra Arial 10 y en una página independiente. Es importante que las tablas sean simples y que no superen el ancho una página DIN A4 vertical. Los originales se deben aportar en formato tabla y no en formato imagen.
 
 **Table 1**. Table heading in English.
 
@@ -121,6 +118,7 @@ write.bibtex(file = "knitcitations.bib")
 #| output: asis
 #| echo: false
 #| cache: false
+#| warning: false
 library(knitr)
 kable(head(iris))
 ```
