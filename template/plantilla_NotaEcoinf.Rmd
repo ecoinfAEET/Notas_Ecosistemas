@@ -32,13 +32,15 @@ bibliography:
 
 > keyword1; keyword2; keyword3; keyword4
 
-```{r knitcitations, echo = FALSE, cache = FALSE, warning = FALSE}
+```{r knitcitations, echo = FALSE, cache = FALSE, warning = FALSE, message = FALSE}
+library(rmarkdown)
 library(knitcitations)
+library(lme4)
 cleanbib()   
 options("citation_format" = "pandoc")
 ```
 
-Esta es una plantilla para escribir [Notas Ecoinformáticas](https://ecoinfaeet.github.io/website/notas-ecoinformaticas.html) en formato Rmarkdown para la revista [Ecosistemas](www.revistaecosistemas.net). Para saber más sobre Rmarkdown, visite <http://rmarkdown.rstudio.com>. Para ver un ejemplo de Nota Ecoinformática escrita íntegramente en Rmarkdown, visite <https://github.com/ecoinfAEET/Notas_Ecosistemas/blob/master/consejos_mejor_codigo/consejos_mejor_codigo.Rmd>.
+Esta es una plantilla para escribir [Notas Ecoinformáticas](https://ecoinfaeet.github.io/notas-ecoinformaticas.html) en formato Rmarkdown para la revista [Ecosistemas](https://www.revistaecosistemas.net/index.php/ecosistemas). Para saber más sobre Rmarkdown, visite <http://rmarkdown.rstudio.com>. Para ver un ejemplo de Nota Ecoinformática escrita íntegramente en Rmarkdown, visite <https://github.com/ecoinfAEET/Notas_Ecosistemas/blob/master/consejos_mejor_codigo/consejos_mejor_codigo.Rmd>.
 
 Hay varias formas de citar bibliografía (véase <http://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html>). Una de ellas requiere simplemente adjuntar un fichero BibTex con todas las referencias (en este ejemplo `references.bib`), y citar cada una de ellas usando su 'CitationKey' [e.g. @Yan2011; @Sutherland2011]. También pueden buscarse referencias en internet, citar utilizando el DOI, o conectarse a una bibliografía de Zotero (ver <https://rstudio.github.io/visual-markdown-editing/#/citations>).
 

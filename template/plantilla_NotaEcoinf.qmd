@@ -34,12 +34,14 @@ bibliography:
 #| echo: false
 #| cache: false
 #| warning: false
+library(quarto)
 library(knitcitations)
+library(lme4)
 cleanbib()   
 cite_options(citation_format = "pandoc")
 ```
 
-Esta es una plantilla para escribir [Notas Ecoinformáticas](https://ecoinfaeet.github.io/website/notas-ecoinformaticas.html) en formato Quarto para la revista [Ecosistemas](www.revistaecosistemas.net). Para saber más sobre Quarto, visite <https://quarto.org/>. La diferencia principal de Quarto respecto a Rmarkdown es que se ha generado para la colaboración de más de una comunidad (es decir, no solo usuarios de R o Python) y utiliza una sintaxis y formato compartido entre distintos lenguajes.
+Esta es una plantilla para escribir [Notas Ecoinformáticas](https://ecoinfaeet.github.io/notas-ecoinformaticas.html) en formato Quarto para la revista [Ecosistemas](https://www.revistaecosistemas.net/index.php/ecosistemas). Para saber más sobre Quarto, visite <https://quarto.org/>. La diferencia principal de Quarto respecto a Rmarkdown es que se ha generado para la colaboración de más de una comunidad (es decir, no solo usuarios de R o Python) y utiliza una sintaxis y formato compartido entre distintos lenguajes.
 
 Hay varias formas de citar bibliografía (véase <https://quarto.org/docs/authoring/footnotes-and-citations.html>). Una de ellas requiere simplemente adjuntar un fichero BibTex con todas las referencias (en este ejemplo `references.bib`), y citar cada una de ellas usando su 'CitationKey' [e.g. @Yan2011; @Sutherland2011]. También pueden buscarse referencias en internet, citar utilizando el DOI o conectarse a una bibliografía de Zotero (ver <https://quarto.org/docs/visual-editor>).
 
