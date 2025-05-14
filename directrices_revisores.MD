@@ -1,6 +1,6 @@
 # Directrices para los revisores de las notas
 
-Las [Notas Ecoinformáticas](https://ecoinfaeet.github.io/website/notas-ecoinformaticas.html) se revisarán mediante un proceso abierto y dinámico siguiendo las [normas de revisión grupal](https://github.com/ecoinfAEET/Notas_Ecosistemas/blob/master/Normas_revision_grupal.MD). Estas son algunas directrices básicas que los revisores tendrán que responder en el proceso de revisión:
+Las [Notas Ecoinformáticas](https://ecoinfaeet.github.io/notas-ecoinformaticas.html) se revisarán mediante un proceso abierto y dinámico siguiendo el proceso de revisión grupal. Estas son algunas directrices básicas que los revisores tendrán que responder en el proceso de revisión:
 
 1)  ¿Está escrita de forma clara?
 
