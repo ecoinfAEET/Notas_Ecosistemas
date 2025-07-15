@@ -136,7 +136,7 @@ plot(x, y)
 
 ###### FIGURA 2
 
-```{r Fig2, echo = FALSE, fig.cap = "Figura 2. Segundo ejemplo", cache = FALSE}
+```{r Fig2, echo = FALSE, fig.cap = "Figura 2. Segundo ejemplo.", cache = FALSE}
 a <- sort(rnorm(100))
 b <- c(rep("Group Small", 35), rep("Group Big", 65))
 boxplot(a ~ b)

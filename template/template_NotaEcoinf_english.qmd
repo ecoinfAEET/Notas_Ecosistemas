@@ -1,0 +1,160 @@
+---
+title: "Ecoinformatics note on..."
+  
+author: First name Last name^1^, First name Last name^2^
+  
+format:
+  docx:
+    fig-height: 6
+    fig-width: 7.5
+    reference-doc: Ecosistemas_template.docx
+    
+csl: ecosistemas.csl
+
+bibliography: 
+  - references.bib
+  - knitcitations.bib
+---
+
+> (1) Institution 1
+
+> (2) Institution 2
+
+> Corresponding author\*: First name Last name \[[author\@gmail.com](mailto:author@gmail.com){.email}\]
+
+# Keywords
+
+> keyword1; keyword2; keyword3; keyword4
+
+# Palabras clave
+
+> palabraclave1; palabraclave2; palabraclave3; palabraclave4
+
+```{r knitcitations}
+#| echo: false
+#| cache: false
+#| warning: false
+library(quarto)
+library(knitcitations)
+library(lme4)
+cleanbib()   
+cite_options(citation_format = "pandoc")
+```
+
+This is a template for writing [Ecoinformatics Notes](https://ecoinfaeet.github.io/notas-ecoinformaticas.html) in Quarto format for the journal [Ecosistemas](https://www.revistaecosistemas.net/index.php/ecosistemas). To learn more about Quarto, visit <https://quarto.org/>. The main difference of Quarto with respect to Rmarkdown is that it has been generated for collaboration of more than one community (i.e. not only R or Python users) and uses a shared syntax and format between different languages.
+
+There are several ways to cite bibliography (see <https://quarto.org/docs/authoring/footnotes-and-citations.html>). One of them requires simply attaching a BibTex file with all references (in this example `references.bib`), and citing each one using its ‘CitationKey’ [e.g. @Yan2011; @Sutherland2011]. You can also search for references on the internet, cite using DOI, or connect to a Zotero bibliography (see <https://quarto.org/docs/visual-editor>).
+
+## How to include examples
+
+```{r read_data}
+#| eval: false
+#| echo: false
+dataset <- read.csv("mydata.csv")
+```
+
+We fit a linear model:
+
+$$
+y_{i} = \alpha + \beta*x_{i} 
+$$
+
+```{r model}
+#| echo: false
+#| eval: false
+model <- lm(y ~ x)
+```
+
+We used R `r citep(citation())` and Quarto `r citep(citation("quarto"))` for all our analyses. To fit mixed models we used `lme4` `r citep(citation("lme4"))`.
+
+# Results
+
+This section is divided into subsections.
+
+## Subsection 1
+
+Trees in plot A were taller than in plot B (mean height: `r mean(25, 31, 28)` vs `r mean(13, 19, 16)` m). And many more results that are dynamically updated.
+
+## Subsection 2
+
+Text.
+
+## Subsection 3
+
+Text.
+
+# Discussion
+
+Text.
+
+# Conclusions
+
+Text.
+
+# Authors' contribution
+
+Text.
+
+# Acknowledgments
+
+This note has been reviewed following a collaborative and public process available at (link to the corresponding issue).
+
+# References
+
+```{r write_citations}
+#| cache: false
+#| include: false
+write.bibtex(file = "knitcitations.bib")
+```
+
+::: {#refs}
+:::
+
+###### TABLE 1
+
+**Table 1**. Each table must provide its corresponding explanatory heading. For Research articles, review articles, and data articles headings will be provided both in Spanish and English. The editorial team can help with translation if necessary. It is important that they are simple and that they do not exceed the width of a vertical DIN A4 page. Once the article is accepted, the originals must be provided in text format (and not in image format) to allow its reproduction.
+
+**Tabla 1**. Encabezamiento de la tabla en español.
+
+```{r Table1}
+#| output: asis
+#| echo: false
+#| cache: false
+#| warning: false
+library(knitr)
+kable(head(iris))
+```
+
+###### FIGURE LEGENDS
+
+**Figure 1**. Figure caption 1.
+
+**Figure 2**. Figure caption 2.
+
+###### PIES DE FIGURA
+
+**Figura 1**. Pie de figura 1.
+
+**Figura 2**. Pie de figura 2.
+
+###### FIGURE 1
+
+```{r Fig1}
+#| echo: false
+#| fig-cap: "Figure 1. This is an example."
+#| cache: false
+x <- rnorm(100)
+y <- jitter(x, 1000)
+plot(x, y)
+```
+
+###### FIGURE 2
+
+```{r Fig2}
+#| echo: false
+#| fig-cap: "Figure 2. Second example."
+#| cache: false
+a <- sort(rnorm(100))
+b <- c(rep("Group Small", 35), rep("Group Big", 65))
+boxplot(a ~ b)
+```

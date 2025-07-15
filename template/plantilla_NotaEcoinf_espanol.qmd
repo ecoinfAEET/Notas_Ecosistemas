@@ -152,7 +152,7 @@ plot(x, y)
 
 ```{r Fig2}
 #| echo: false
-#| fig-cap: "Figura 2. Segundo ejemplo"
+#| fig-cap: "Figura 2. Segundo ejemplo."
 #| cache: false
 a <- sort(rnorm(100))
 b <- c(rep("Group Small", 35), rep("Group Big", 65))
