@@ -9,7 +9,7 @@ format:
     fig-width: 7.5
     reference-doc: Ecosistemas_template.docx
     
-csl: ecosistemas.csl
+csl: apa.csl
 
 bibliography: 
   - references.bib

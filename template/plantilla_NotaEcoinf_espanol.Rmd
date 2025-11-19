@@ -11,7 +11,7 @@ output:
     highlight: null
     reference_docx: Ecosistemas_template.docx
     
-csl: ecosistemas.csl
+csl: apa.csl
 
 bibliography: 
   - references.bib
